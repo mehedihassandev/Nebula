@@ -3,6 +3,7 @@ import { iconHash } from '@utils/icons';
 import { contacts } from '@constants/contacts';
 import { ContactForm } from '@components/ContactForm';
 import { IContact } from '@models/Contact';
+import { IntelliSenseTooltip } from '@components/IntelliSenseTooltip';
 
 /**
  * Renders the Contact section, displaying communication links and a contact form.
@@ -29,14 +30,18 @@ export const Contact = () => {
   };
 
   return (
-    <section className="max-w-screen-2xl h-full flex-1 grid grid-cols-1 lg:grid-cols-2 items-center justify-around px-8 lg:px-14 py-16 lg:py-24 gap-10 lg:gap-5">
-      <div className="text-textColor">
-        <h1 className="text-xl lg:text-2xl font-normal tracking-wide capitalize font-saira">
+    <section className="max-w-screen-2xl h-full flex-1 flex flex-col justify-center px-8 lg:px-14 py-16 lg:py-24 gap-10 lg:gap-5">
+      <span className="block mb-6 text-[10px] lg:text-xs text-white/30 font-mono tracking-widest uppercase cursor-pointer hover:text-white/80 transition-colors">
+        {contacts.length} Channels | 1 Open Connection
+      </span>
+      <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-around gap-10 lg:gap-5">
+        <div className="text-textColor">
+          <h1 className="text-xl lg:text-2xl font-normal tracking-wide capitalize font-saira">
           Let&apos;s get in touch?
         </h1>
 
         <p className="max-w-xl mt-6 font-syne text-sm lg:text-base leading-loose lg:leading-8 opacity-90">
-          Ready to collaborate or chat about web development? I’m always open to
+          Ready to <IntelliSenseTooltip keyword="Collaborate" definition={[{ property: "status", value: "Open" }, { property: "responseTime", value: "< 24 hours" }]}>collaborate</IntelliSenseTooltip> or chat about <IntelliSenseTooltip keyword="WebDev" definition={[{ property: "passion", value: "High" }, { property: "coffeeCups", value: "Many" }]}>web development</IntelliSenseTooltip>? I’m always open to
           connecting with fellow developers and enthusiasts. Feel free to reach
           out!
         </p>
@@ -56,10 +61,11 @@ export const Contact = () => {
               </h2>
             </div>
           ))}
+          </div>
         </div>
-      </div>
 
-      <ContactForm />
+        <ContactForm />
+      </div>
     </section>
   );
 };

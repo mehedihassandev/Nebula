@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { IoMdArrowDropright } from 'react-icons/io';
 import { skills } from '@constants/skills';
 import { ISkill } from '@models/Skill';
+import { IntelliSenseTooltip } from '@components/IntelliSenseTooltip';
 
 /**
  * Renders the About section of the portfolio, detailing the developer's journey,
@@ -20,6 +21,9 @@ export const About = () => {
           <span className="text-secondary opacity-70 mr-3">//</span> About Me
         </h1> */}
       <div className="text-textColor font-syne pb-4">
+        <span className="block mb-3 text-[10px] lg:text-xs text-white/30 font-mono tracking-widest uppercase cursor-pointer hover:text-white/80 transition-colors">
+          {new Date().getFullYear() - 2019}+ Years Coding | {skills.length} Technologies Used
+        </span>
         <motion.p className="pb-6 text-sm lg:text-base leading-loose lg:leading-8 text-textColor font-syne">
           Hello there! My name is
           <span className="font-medium text-secondary"> Md. Mehedi Hassan</span>
@@ -33,15 +37,14 @@ export const About = () => {
         </motion.p>
 
         <motion.p className="pb-6 text-sm lg:text-base leading-loose lg:leading-8 font-syne text-textColor">
-          Time travel to the present, where I am employed by a startup company
-          as a{' '}
-          <span className="font-medium text-secondary">React Developer</span>. I
-          make numerous contributions here, such as creating the
+          Time travel to the present, where I am balancing impactful roles as a{' '}
+          <IntelliSenseTooltip keyword="ReactDeveloper" definition={[{ property: "role", value: "Frontend" }, { property: "focus", value: "Inclusive UI" }]}>React Developer</IntelliSenseTooltip>. 
+          At <span className="font-medium text-white hover:text-secondary transition-colors duration-300">Hubar Tech Limited</span>, I contribute heavily to creating enterprise solutions like the 
           <span className="font-medium text-secondary"> POS</span>,
           <span className="font-medium text-secondary"> PCM</span>, and
-          <span className="font-medium text-secondary"> E-Bill</span> system.
-          These days, creating inclusive and accessible digital experiences and
-          goods for a wide range of customers is my primary emphasis.
+          <span className="font-medium text-secondary"> E-Bill</span> systems. Concurrently, at <span className="font-medium text-white hover:text-secondary transition-colors duration-300">10 Billion</span>, 
+          I build scalable, high-performance web and mobile platforms that help address global challenges. 
+          These days, creating inclusive and accessible digital experiences for a wide range of customers is my primary emphasis.
         </motion.p>
 
         <motion.p className="pb-6 text-sm lg:text-base leading-loose lg:leading-8 font-syne text-textColor">
@@ -56,9 +59,9 @@ export const About = () => {
         <motion.p className="pb-6 text-sm lg:text-base leading-loose lg:leading-8 font-syne text-textColor">
           In addition to my work in React, I have also ventured into mobile
           development with{' '}
-          <span className="font-medium text-secondary">React Native</span>. I
+          <IntelliSenseTooltip keyword="ReactNative" definition={[{ property: "appsBuilt", value: 3 }, { property: "platform", value: "Cross-Platform" }]}>React Native</IntelliSenseTooltip>. I
           played a key role in developing a{' '}
-          <span className="font-medium text-secondary">MyCare app</span>, which
+          <IntelliSenseTooltip keyword="MyCareApp" definition={[{ property: "type", value: "Mobile App" }, { property: "features", value: "Payments & Top-up" }]}>MyCare app</IntelliSenseTooltip>, which
           enables users to perform essential tasks such as
           <span className="font-medium text-secondary"> top-up</span>,
           <span className="font-medium text-secondary"> bill payments</span> and{' '}

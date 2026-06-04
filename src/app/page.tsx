@@ -3,6 +3,9 @@ import { motion } from 'framer-motion';
 import resolveConfig from 'tailwindcss/resolveConfig';
 import tailwindConfig from '../../tailwind.config';
 import { useState } from 'react';
+import { IntelliSenseTooltip } from '@components/IntelliSenseTooltip';
+import { projects } from '@constants/projects';
+import { experience } from '@constants/experience';
 
 /**
  * Renders the Home/Landing page of the portfolio.
@@ -51,28 +54,28 @@ export const Home = () => {
               animate={{ filter: isLoading ? 'blur(10px)' : '' }}
             />
           </div>
-          <p className="text-sm lg:text-base leading-loose lg:leading-8 mt-8 lg:mt-0 text-textColor font-syne w-[95%]">
-            I am an experienced{' '}
-            <span className="text-secondary font-medium">React</span> and{' '}
-            <span className="text-secondary font-medium">React Native</span>{' '}
-            developer specializing in dynamic, responsive websites, web apps,
-            and cross-platform mobile applications. Leveraging my expertise in{' '}
+          <div className="mt-8 lg:mt-0 w-[95%]">
+            <span className="block mb-3 text-[10px] lg:text-xs text-white/30 font-mono tracking-widest uppercase cursor-pointer hover:text-white/80 transition-colors">
+              {projects.length} Projects | {experience.length} Roles
+            </span>
+            <p className="text-sm lg:text-base leading-loose lg:leading-8 text-textColor font-syne">
+              I am an experienced{' '}
+            <IntelliSenseTooltip keyword="React" definition={[{ property: "experience", value: "3+ Years" }, { property: "proficiency", value: "Expert" }]}>React</IntelliSenseTooltip> and{' '}
+            <IntelliSenseTooltip keyword="ReactNative" definition={[{ property: "appsBuilt", value: "Multiple" }, { property: "platform", value: "Cross-Platform" }]}>React Native</IntelliSenseTooltip>{' '}
+            developer specializing in dynamic, scalable web and mobile applications. Leveraging my expertise in{' '}
             <span className="text-secondary font-medium">JavaScript</span>,{' '}
-            <span className="text-secondary font-medium">TypeScript</span>,{' '}
+            <IntelliSenseTooltip keyword="TypeScript" definition={[{ property: "strictMode", value: true }, { property: "loveLevel", value: "100%" }]}>TypeScript</IntelliSenseTooltip>,{' '}
             <span className="text-secondary font-medium">Material UI</span>,{' '}
-            <span className="text-secondary font-medium">Tailwind CSS</span>,
-            and <span className="text-secondary font-medium">Redux</span>, I
-            build user-centered, visually appealing applications for both web
-            and mobile platforms. I focus on managing state, creating reusable
-            components, and ensuring seamless integration across the frontend.
-            For mobile apps, I excel at integrating native modules and utilizing
-            libraries like NativeBase and React Navigation. My priorities
-            include enhancing scalability, maximizing performance, and writing
-            adaptable code that supports evolving project needs. Whether on the
-            web or mobile, my goal is to deliver intuitive, fluid user
-            experiences while maintaining high-quality, maintainable, and
-            future-proof code.
-          </p>
+            <IntelliSenseTooltip keyword="TailwindCSS" definition={[{ property: "utilityFirst", value: true }]}>Tailwind CSS</IntelliSenseTooltip>,
+            and <IntelliSenseTooltip keyword="Redux" definition={[{ property: "stateManagement", value: "Predictable" }]}>Redux</IntelliSenseTooltip>, I
+            build robust enterprise-grade software (such as POS and PCM systems) as well as high-performance platforms designed to address global challenges. 
+            I focus on managing complex state, creating reusable architectures, and ensuring seamless integration across the frontend. 
+            For mobile applications, I excel at integrating native modules to deliver native-like experiences. My priorities
+            always center around enhancing scalability, maximizing performance, and writing adaptable code that supports evolving business needs. 
+            Whether on the web or mobile, my ultimate goal is to deliver intuitive, fluid user
+            experiences while maintaining clean, future-proof code.
+            </p>
+          </div>
           {/* <div className="grid grid-cols-1 lg:grid-cols-3 justify-between gap-7 items-center mt-7 lg:mt-16 xl:mt-24">
             <h2 className="text-2xl lg:text-3xl xl:text-5xl text-secondary font-saira leading-3 xl:leading-9 font-semibold">2 + <br /> <span className="text-lg lg:text-lg text-white font-normal font-syne">Years of Experience</span></h2>
             <h2 className="text-2xl lg:text-3xl xl:text-5xl text-secondary font-saira leading-3 xl:leading-9 font-semibold">150+ <br /> <span className="text-lg lg:text-lg text-white font-normal font-syne">Projects completed</span></h2>

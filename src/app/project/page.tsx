@@ -6,6 +6,7 @@ import { IoMdArrowDropright } from 'react-icons/io';
 import tailwindConfig from '../../../tailwind.config';
 import { projects } from '@constants/projects';
 import { IProject, IProjectLink } from '@models/Project';
+import { IntelliSenseTooltip } from '@components/IntelliSenseTooltip';
 
 /**
  * Renders the Projects gallery to showcase completed work.
@@ -27,9 +28,13 @@ export const Projects = () => {
         </h1>
       </div> */}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 max-w-screen-2xl gap-16 px-6 lg:px-0">
-        {projects.map((item: IProject, index: number) => (
-          <Fragment key={item.id}>
+      <div className="flex flex-col px-6 lg:px-0">
+        <span className="block mb-6 text-[10px] lg:text-xs text-white/30 font-mono tracking-widest uppercase cursor-pointer hover:text-white/80 transition-colors">
+          {projects.length} Repositories | {projects.filter(p => p.links.some(l => l.title.toLowerCase() === 'live')).length} Live Deployments
+        </span>
+        <div className="grid grid-cols-1 lg:grid-cols-2 max-w-screen-2xl gap-16">
+          {projects.map((item: IProject, index: number) => (
+            <Fragment key={item.id}>
             {index % 2 === 0 && (
               <div>
                 <motion.img
@@ -59,7 +64,7 @@ export const Projects = () => {
             )}
             <div>
               <h2 className="text-secondary text-lg lg:text-xl font-saira font-semibold pb-3">
-                {item.title}
+                <IntelliSenseTooltip keyword={item.title.replace(/\s+/g, '')} definition={[{ property: "status", value: "Completed" }]}>{item.title}</IntelliSenseTooltip>
               </h2>
               <p className="text-textColor text-sm lg:text-base leading-loose lg:leading-8 font-syne pb-4 opacity-90">
                 {item.description}
@@ -71,10 +76,10 @@ export const Projects = () => {
                 {item.technologies.map((tech: string, techIndex: number) => (
                   <h2
                     key={techIndex}
-                    className="text-sm lg:text-base text-textColor opacity-90 items-center flex font-saira font-semibold gap-1 transition-colors hover:text-secondary"
+                    className="text-sm lg:text-base text-textColor opacity-90 items-center flex font-saira font-semibold gap-1 transition-colors"
                   >
-                    <IoMdArrowDropright className="text-lg lg:text-xl" />
-                    {tech}
+                    <IoMdArrowDropright className="text-lg lg:text-xl text-secondary" />
+                    <IntelliSenseTooltip keyword={tech.replace(/\s+/g, '')} definition={[{ property: "type", value: "Dependency" }]}>{tech}</IntelliSenseTooltip>
                   </h2>
                 ))}
               </div>
@@ -140,6 +145,7 @@ export const Projects = () => {
             )}
           </Fragment>
         ))}
+        </div>
       </div>
     </div>
   );
