@@ -64,11 +64,11 @@ export const ContactForm = () => {
   });
 
   return (
-    <div className="box rounded-xl">
-      <div className="w-full px-8 py-5 pb-10 mx-auto overflow-hidden bg-primary rounded-xl">
-        <form className="mt-4 w-full" onSubmit={formik.handleSubmit}>
+    <div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-xl p-8 lg:p-10">
+      <div className="w-full mx-auto">
+        <form className="w-full" onSubmit={formik.handleSubmit}>
           <div className="flex-1">
-            <label className="block mb-2 text-sm text-textColor font-saira tracking-wide">
+            <label className="block mb-3 text-xs uppercase tracking-widest text-secondary/60 font-mono">
               Full Name
             </label>
             <input
@@ -78,14 +78,14 @@ export const ContactForm = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="John Doe"
-              className="block w-full px-4 py-2 mt-2 text-sm text-white border rounded-md bg-gray-900 border-secondary/50 focus:border-secondary focus:ring-secondary focus:ring-opacity-40 focus:outline-none focus:ring font-syne"
+              className="block w-full px-5 py-3 mt-2 text-sm text-white placeholder-white/20 border-b border-white/10 bg-transparent focus:border-secondary focus:outline-none font-syne transition-colors"
             />
             {formik.touched.name && formik.errors.name ? (
               <div className="text-red-500 pt-2 pl-2">{formik.errors.name}</div>
             ) : null}
           </div>
           <div className="flex-1 mt-6">
-            <label className="block mb-2 text-sm text-textColor font-saira tracking-wide">
+            <label className="block mb-3 text-xs uppercase tracking-widest text-secondary/60 font-mono">
               Email address
             </label>
             <input
@@ -95,18 +95,18 @@ export const ContactForm = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="johndoe@example.com"
-              className="block w-full px-4 py-2 mt-2 text-sm text-white border rounded-md bg-gray-900 border-secondary/50 focus:border-secondary focus:ring-secondary focus:ring-opacity-40 focus:outline-none focus:ring font-syne"
+              className="block w-full px-5 py-3 mt-2 text-sm text-white placeholder-white/20 border-b border-white/10 bg-transparent focus:border-secondary focus:outline-none font-syne transition-colors"
             />
             {formik.touched.email && formik.errors.email ? (
               <div className="text-red-500 pt-2 pl-2">{formik.errors.email}</div>
             ) : null}
           </div>
           <div className="w-full mt-6">
-            <label className="block mb-2 text-sm text-textColor font-saira tracking-wide">
+            <label className="block mb-3 text-xs uppercase tracking-widest text-secondary/60 font-mono">
               Message
             </label>
             <textarea
-              className="block w-full h-32 px-4 py-2 mt-2 text-sm text-white placeholder-gray-400 border border-secondary/50 rounded-md bg-gray-900 focus:border-secondary focus:ring-secondary focus:ring-opacity-40 focus:outline-none focus:ring font-syne resize-none"
+              className="block w-full h-32 px-5 py-3 mt-2 text-sm text-white placeholder-white/20 border border-white/10 rounded-xl bg-black/20 focus:border-secondary focus:outline-none font-syne resize-none transition-colors"
               placeholder="Message"
               name="message"
               value={formik.values.message}
@@ -119,9 +119,9 @@ export const ContactForm = () => {
           </div>
           <button
             type="submit"
-            className={`w-full px-6 py-2 mt-6 text-sm font-medium tracking-wide capitalize transition-colors duration-300 transform rounded-md focus:outline-none focus:ring focus:ring-secondary focus:ring-opacity-50 font-saira ${!formik.isValid
-              ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-              : "bg-secondary text-primary hover:bg-opacity-90"
+            className={`w-full px-6 py-4 mt-8 text-xs font-mono tracking-widest uppercase transition-all duration-300 transform rounded-xl focus:outline-none flex items-center justify-center ${!formik.isValid
+              ? "border border-white/10 text-white/30 bg-transparent cursor-not-allowed"
+              : "border border-secondary/30 text-secondary bg-secondary/10 hover:bg-secondary/20 hover:border-secondary/50 hover:shadow-[0_0_20px_rgba(20,255,236,0.2)]"
               }`}
             disabled={!formik.isValid || loading}
           >

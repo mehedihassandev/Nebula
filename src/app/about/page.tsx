@@ -79,19 +79,22 @@ export const About = () => {
           world of web and mobile development.
         </motion.p>
       </div>
-      <motion.h2 className="text-textColor font-syne text-lg lg:text-xl">
-        I&apos;ve recently been working with the following technologies:
-      </motion.h2>
-      <div className="grid grid-cols-2 lg:grid-cols-7 pb-16 lg:pb-2 gap-3">
-        {skills.map((skill: ISkill, index: number) => (
-          <h2
-            key={index}
-            className="text-sm lg:text-base text-textColor items-center flex cursor-pointer font-saira font-semibold gap-2 transition-colors hover:text-secondary"
-          >
-            <IoMdArrowDropright className="text-xl" />
-            {skill.name}
-          </h2>
-        ))}
+      <div className="mt-8 pt-6 pb-4">
+        <h3 className="text-[10px] lg:text-xs uppercase tracking-widest text-secondary/60 font-mono mb-6 flex items-center gap-4">
+          <span>Technologies Used</span>
+          <div className="h-px flex-1 bg-white/5"></div>
+        </h3>
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-7 gap-y-4 gap-x-2 pb-16 lg:pb-8">
+          {skills.map((skill: ISkill, index: number) => (
+            <h2
+              key={index}
+              className="text-sm lg:text-base text-textColor opacity-90 items-center flex font-saira font-semibold gap-1 transition-colors hover:text-secondary"
+            >
+              <IoMdArrowDropright className="text-lg lg:text-xl text-secondary flex-shrink-0" />
+              <span className="truncate">{skill.name}</span>
+            </h2>
+          ))}
+        </div>
       </div>
       {/* </div> */}
     </div>

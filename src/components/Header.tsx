@@ -3,8 +3,12 @@ export const Header = () => {
     <div className="py-6">
       {/* <p className="text-sm text-secondary pb-1 ">Hi, my name is</p> */}
       {/* <img src="https://i.ibb.co/dKxMcmd/me.jpg" alt="Md. Mehedi Hassan" className="w-[424px] h-[500px] rounded-xl mb-8" /> */}
-      <h1 className="text-2xl lg:text-3xl font-saira font-normal tracking-wider">Md. Mehedi Hassan</h1>
-      <p className="text-base lg:text-lg font-syne opacity-70 mt-1">Junior Frontend Engineer</p>
+      <h1 className="text-3xl lg:text-4xl font-saira font-semibold tracking-wider bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent pb-1">
+        Md. Mehedi Hassan
+      </h1>
+      <p className="text-base lg:text-lg font-syne text-textColor opacity-90 mt-1">
+        Software Engineer
+      </p>
 
       {/* <motion.p
         whileHover={{

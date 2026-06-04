@@ -15,8 +15,8 @@ export const Footer = () => {
   return (
     <div>
       <div className="pb-5">
-        <h3 className="text-[#94A3B8] text-[16px] pt-4 font-syne">Based in:</h3>
-        <p className="text-secondary text-[20px] font-semibold font-saira">
+        <h3 className="text-textColor opacity-90 text-sm lg:text-base pt-4 font-syne">Based in:</h3>
+        <p className="text-secondary text-lg lg:text-xl font-semibold font-saira mt-1">
           Dhaka, Bangladesh
         </p>
       </div>

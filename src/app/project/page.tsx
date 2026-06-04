@@ -30,27 +30,42 @@ export const Projects = () => {
 
       <div className="flex flex-col px-6 lg:px-0">
         <span className="block mb-6 text-[10px] lg:text-xs text-white/30 font-mono tracking-widest uppercase cursor-pointer hover:text-white/80 transition-colors">
-          {projects.length} Repositories | {projects.filter(p => p.links.some(l => l.title.toLowerCase() === 'live')).length} Live Deployments
+          {projects.length} Repositories |{' '}
+          {
+            projects.filter((p) =>
+              p.links.some((l) => l.title.toLowerCase() === 'live')
+            ).length
+          }{' '}
+          Live Deployments
         </span>
-        <div className="grid grid-cols-1 lg:grid-cols-2 max-w-screen-2xl gap-16">
+        <div className="flex flex-col gap-12 lg:gap-24 max-w-screen-2xl mx-auto pb-20 w-full">
           {projects.map((item: IProject, index: number) => (
-            <Fragment key={item.id}>
-            {index % 2 === 0 && (
-              <div>
+            <motion.div
+              key={item.id}
+              className="relative flex flex-col lg:flex-row items-center gap-8 lg:gap-16 py-6"
+            >
+              <div
+                className={`w-full lg:w-1/2 flex-shrink-0 overflow-hidden rounded-2xl ${index % 2 !== 0 ? 'lg:order-last' : ''}`}
+              >
                 <motion.img
                   src={item.imgSrc}
-                  alt="about"
-                  className="w-full h-full lg:h-80 box"
+                  alt={item.title}
+                  className={`w-full h-auto lg:h-[400px] object-cover ${isLoading ? 'blur-2xl opacity-30' : 'opacity-100'}`}
                   style={{
-                    filter: isLoading ? 'blur(10px)' : 'grayscale(50%)'
+                    filter: isLoading
+                      ? 'blur(10px)'
+                      : 'grayscale(30%) brightness(80%)'
                   }}
                   animate={{
-                    filter: isLoading ? 'blur(10px)' : 'grayscale(50%)'
+                    filter: isLoading
+                      ? 'blur(10px)'
+                      : 'grayscale(30%) brightness(80%)'
                   }}
                   whileHover={{
-                    filter: 'contrast(130%)',
-                    boxShadow: `10px 10px 0px 0px ${theme.theme.colors.secondary}`
+                    filter: 'grayscale(0%) brightness(100%)',
+                    scale: 1.05
                   }}
+                  transition={{ duration: 0.5 }}
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
@@ -61,90 +76,83 @@ export const Projects = () => {
                   }}
                 />
               </div>
-            )}
-            <div>
-              <h2 className="text-secondary text-lg lg:text-xl font-saira font-semibold pb-3">
-                <IntelliSenseTooltip keyword={item.title.replace(/\s+/g, '')} definition={[{ property: "status", value: "Completed" }]}>{item.title}</IntelliSenseTooltip>
-              </h2>
-              <p className="text-textColor text-sm lg:text-base leading-loose lg:leading-8 font-syne pb-4 opacity-90">
-                {item.description}
-              </p>
-              <h3 className="mt-4 text-base text-textColor font-saira font-medium opacity-80">
-                Using Technology
-              </h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-2 xl:grid-cols-4 gap-2 pt-3">
-                {item.technologies.map((tech: string, techIndex: number) => (
-                  <h2
-                    key={techIndex}
-                    className="text-sm lg:text-base text-textColor opacity-90 items-center flex font-saira font-semibold gap-1 transition-colors"
-                  >
-                    <IoMdArrowDropright className="text-lg lg:text-xl text-secondary" />
-                    <IntelliSenseTooltip keyword={tech.replace(/\s+/g, '')} definition={[{ property: "type", value: "Dependency" }]}>{tech}</IntelliSenseTooltip>
-                  </h2>
-                ))}
-              </div>
 
-              <div className="mt-6">
-                <h3 className="text-textColor text-base font-saira font-medium pb-2 opacity-80">
-                  Links
-                </h3>
-
-                <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 pt-3">
-                  {item.links.map((link: IProjectLink, linkIndex: number) => (
-                    <motion.button
-                      key={linkIndex}
-                      className={`w-28 h-10 text-sm text-primary bg-secondary rounded-full items-center justify-center flex cursor-pointer font-saira font-medium disabled:bg-gray-400 transition-colors hover:bg-secondary/90`}
-                      whileHover={
-                        link.url
-                          ? {
-                              scale: 1.05,
-                              boxShadow: `0px 0px 10px ${theme.theme.colors.buttonColor}`
-                            }
-                          : {}
-                      }
-                      onClick={() => {
-                        if (link.url) {
-                          window.open(link.url, '_blank', 'noreferrer');
-                        }
-                      }}
-                      disabled={!link.url}
+              <div className="w-full lg:w-1/2 flex flex-col justify-center">
+                <h2 className="text-2xl lg:text-3xl font-saira font-semibold pb-4">
+                  <span className="bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent hover:from-secondary hover:to-secondary/60 transition-all duration-500 cursor-pointer">
+                    <IntelliSenseTooltip
+                      keyword={item.title.replace(/\s+/g, '')}
+                      definition={[{ property: 'status', value: 'Completed' }]}
                     >
-                      {link.title}
-                    </motion.button>
-                  ))}
+                      {item.title}
+                    </IntelliSenseTooltip>
+                  </span>
+                </h2>
+                <p className="text-white/60 text-sm lg:text-base leading-loose lg:leading-8 font-syne pb-4">
+                  {item.description}
+                </p>
+                <div className="mt-4 pt-4">
+                  <h3 className="text-[10px] lg:text-xs uppercase tracking-widest text-secondary/60 font-mono mb-4 flex items-center gap-4">
+                    <span>Technologies Used</span>
+                    <div className="h-px flex-1 bg-white/5"></div>
+                  </h3>
+                  <div className="flex flex-wrap gap-3 items-center">
+                    {item.technologies.map(
+                      (tech: string, techIndex: number) => (
+                        <h2
+                          key={techIndex}
+                          className="text-sm lg:text-base text-textColor opacity-90 items-center flex font-saira font-semibold gap-1 transition-colors"
+                        >
+                          <IoMdArrowDropright className="text-lg lg:text-xl text-secondary" />
+                          <IntelliSenseTooltip
+                            keyword={tech.replace(/\s+/g, '')}
+                            definition={[
+                              { property: 'type', value: 'Dependency' }
+                            ]}
+                          >
+                            {tech}
+                          </IntelliSenseTooltip>
+                        </h2>
+                      )
+                    )}
+                  </div>
+                </div>
+
+                <div className="mt-8">
+                  <h3 className="text-[10px] lg:text-xs uppercase tracking-widest text-white/30 font-mono mb-4">
+                    Project Links
+                  </h3>
+
+                  <div className="flex flex-wrap gap-4 items-center">
+                    {item.links.map((link: IProjectLink, linkIndex: number) => (
+                      <motion.button
+                        key={linkIndex}
+                        className={`px-6 py-2.5 text-[10px] lg:text-xs font-mono tracking-widest uppercase border border-secondary/20 text-secondary bg-secondary/5 rounded-full flex items-center justify-center transition-all disabled:opacity-30 disabled:border-white/10 disabled:text-white/30 disabled:bg-transparent`}
+                        whileHover={
+                          link.url
+                            ? {
+                                scale: 1.05,
+                                boxShadow: `0px 4px 20px ${theme.theme.colors.secondary}30`,
+                                backgroundColor: `${theme.theme.colors.secondary}15`,
+                                borderColor: `${theme.theme.colors.secondary}50`
+                              }
+                            : {}
+                        }
+                        onClick={() => {
+                          if (link.url) {
+                            window.open(link.url, '_blank', 'noreferrer');
+                          }
+                        }}
+                        disabled={!link.url}
+                      >
+                        {link.title}
+                      </motion.button>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
-            {index % 2 !== 0 && (
-              <div>
-                <motion.img
-                  src={item.imgSrc}
-                  alt="about"
-                  className={`w-full h-full lg:h-80 box ${isLoading ? 'blur-2xl opacity-30' : 'opacity-100'}`}
-                  style={{
-                    filter: isLoading ? 'blur(10px)' : 'grayscale(50%)'
-                  }}
-                  animate={{
-                    filter: isLoading ? 'blur(10px)' : 'grayscale(50%)'
-                  }}
-                  whileHover={{
-                    filter: 'contrast(130%)',
-                    boxShadow: `10px 10px 0px 0px ${theme.theme.colors.secondary}`,
-                    transform: 'translateY(-10px) translateX(-10px)'
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.onerror = null;
-                    target.src = item.errorImgSrc;
-                  }}
-                  onLoad={() => {
-                    setIsLoading(false);
-                  }}
-                />
-              </div>
-            )}
-          </Fragment>
-        ))}
+            </motion.div>
+          ))}
         </div>
       </div>
     </div>

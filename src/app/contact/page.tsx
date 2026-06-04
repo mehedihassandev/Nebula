@@ -36,7 +36,7 @@ export const Contact = () => {
       </span>
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-around gap-10 lg:gap-5">
         <div className="text-textColor">
-          <h1 className="text-xl lg:text-2xl font-normal tracking-wide capitalize font-saira">
+          <h1 className="text-4xl lg:text-5xl font-saira font-semibold pb-4 bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
           Let&apos;s get in touch?
         </h1>
 
