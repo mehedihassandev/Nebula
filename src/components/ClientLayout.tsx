@@ -10,7 +10,8 @@ import { Footer } from "./Footer";
 import { CursorEffect } from "../components/CursorEffect";
 import { useCursorEffect } from "@hooks/cursor-effect-hook";
 import { useNotification } from "@hooks/notification-hook";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
+import { EditorTabs } from "./EditorTabs";
 
 /**
  * Defines the main shell structure for the application, handling the responsive sidebar,
@@ -56,7 +57,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
       <div
         className={`bg-primary h-screen w-screen md:w-[450px] xl:w-[550px] pl-10 flex flex-col justify-around transition-all duration-300 fixed md:static ${showSidebar ? "left-0 z-40 pr-10" : "-left-full"
-          } lg:left-0 border-r-2 border-secondary rounded-2xl`}
+          } lg:left-0 border-r border-white/5`}
       >
         <div>
           <Header />
@@ -66,16 +67,19 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
         <Footer />
       </div>
 
-      <main className="w-full h-screen bg-primary overflow-auto relative">
+      <main className="w-full h-screen bg-primary overflow-auto relative flex flex-col">
+        <EditorTabs />
         <img
           src="https://i.ibb.co/R7nJpLv/HI.png"
           alt="Background"
           className="fixed w-[200px] h-[125px] lg:w-[350px] lg:h-[300px] top-1/2 left-1/3 lg:left-1/2 transform -translate-x-1/1 -translate-y-1/2 z-10 opacity-100"
           style={{ zIndex: 1 }}
         />
-        <div style={{ position: "relative", zIndex: 2 }}>
-          {children}
-          <Analytics />
+        <div style={{ position: "relative", zIndex: 2 }} className="flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col w-full h-full">
+            {children}
+            <Analytics />
+          </div>
         </div>
       </main>
 

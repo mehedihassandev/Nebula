@@ -1,25 +1,24 @@
-import { IoMdArrowDropright } from "react-icons/io";
-import { experience } from "@constants/experience";
-import { IExperience, IExperienceHighlight } from "@models/Experience";
+import { IoMdArrowDropright } from 'react-icons/io';
+import { experience } from '@constants/experience';
+import { IExperience, IExperienceHighlight } from '@models/Experience';
 
 /**
- * Renders the Experience timeline on the portfolio. 
+ * Renders the Experience timeline on the portfolio.
  * This component visually maps out the developer's professional history,
- * highlighting roles, responsibilities, and specific technologies utilized 
+ * highlighting roles, responsibilities, and specific technologies utilized
  * to build trust and demonstrate practical industry expertise.
- * 
+ *
  * @returns The structured Experience page component.
  */
 export const Experience = () => {
-
   return (
-    <div className="w-full h-full lg:h-screen grid grid-cols items-center px-10 lg:px-14 xl:px-14 overflow-auto">
-      <div className="max-w-screen-2xl py-6 lg:py-10">
-        <h1 className="text-3xl font-semibold text-white font-saira pb-5 pl-5 lg:pl-0">
-          <span className="text-secondary">02.</span> Experience
-        </h1>
+    <div className="w-full h-full flex-1 grid grid-cols items-center px-4 lg:px-4 py-6 lg:py-0 overflow-auto">
+      <div className="max-w-screen-2xl">
+        {/* <h1 className="text-2xl lg:text-3xl font-normal tracking-wide text-white font-saira pb-8 pl-4 lg:pl-0">
+          <span className="text-secondary opacity-70 mr-3">//</span> Experience
+        </h1> */}
 
-        <div className="w-full pt-5">
+        <div className="w-full">
           <div className="px-0 lg:px-2">
             <div className="grid gap-4 mx-0 lg:mx-4 grid-cols-1">
               <div className="relative px-0 lg:px-4 space-y-6">
@@ -29,11 +28,11 @@ export const Experience = () => {
                       key={exp.id}
                       className="flex flex-col sm:relative sm:before:absolute sm:before:top-2 sm:before:w-4 sm:before:h-4 sm:before:rounded-full sm:before:left-[-35px] sm:before:z-[1] before:bg-white hover:before:bg-secondary"
                     >
-                      <time className="text-xs font-syne uppercase text-white">
+                      <time className="text-xs lg:text-sm font-syne uppercase text-white tracking-widest opacity-80">
                         {exp.date}
                       </time>
                       <h3 className="text-xl text-white font-syne">
-                        <span className="font-semibold font-saira text-secondary">
+                        <span className="font-medium tracking-wide font-saira text-secondary">
                           {exp.title}
                         </span>
                         | {exp.position}
@@ -41,44 +40,46 @@ export const Experience = () => {
                       {exp.description.map((desc: string, index: number) => (
                         <p
                           key={index}
-                          className="mt-2 text-textColor text-lg leading-6 font-syne"
+                          className="mt-4 text-textColor text-sm lg:text-base leading-loose lg:leading-8 font-syne opacity-90"
                         >
                           {desc}
                         </p>
                       ))}
-                      {exp.highlights.map((highlight: IExperienceHighlight, index: number) => (
-                        <li
-                          key={index}
-                          className="pt-5 text-textColor text-lg leading-6 font-syne"
-                        >
-                          <span className="text-secondary font-semibold font-saira">
-                            {highlight.title}
-                          </span>
-                          {highlight.detail}
-                          {highlight.additionalDetail &&
-                            highlight.additionalDetail.length > 0 && (
-                              <div className="text-textColor font-syne mt-1">
-                                {highlight.additionalDetail.map(
-                                  (point: string, pointIndex: number) => (
-                                    <p key={pointIndex} className="pt-2">
-                                      {point}
-                                    </p>
-                                  ),
-                                )}
-                              </div>
-                            )}
-                        </li>
-                      ))}
-                      <h3 className="mt-7 text-lg text-textColor font-saira font-semibold">
+                      {exp.highlights.map(
+                        (highlight: IExperienceHighlight, index: number) => (
+                          <li
+                            key={index}
+                            className="pt-4 text-textColor text-sm lg:text-base leading-loose lg:leading-8 font-syne opacity-90"
+                          >
+                            <span className="text-secondary font-semibold font-saira pr-2">
+                              {highlight.title}
+                            </span>
+                            {highlight.detail}
+                            {highlight.additionalDetail &&
+                              highlight.additionalDetail.length > 0 && (
+                                <div className="text-textColor font-syne mt-1">
+                                  {highlight.additionalDetail.map(
+                                    (point: string, pointIndex: number) => (
+                                      <p key={pointIndex} className="pt-2">
+                                        {point}
+                                      </p>
+                                    )
+                                  )}
+                                </div>
+                              )}
+                          </li>
+                        )
+                      )}
+                      <h3 className="mt-8 text-base text-textColor font-saira font-medium opacity-80">
                         Using Technology
                       </h3>
                       <div className="grid grid-cols-2 lg:grid-cols-7 pb-16 lg:pb-2 items-center gap-3 pt-7 lg:pt-5">
                         {exp.skills.map((skill: string, index: number) => (
                           <h4
                             key={index}
-                            className="text-md text-textColor items-center  flex cursor-pointer font-saira font-semibold"
+                            className="text-sm lg:text-base text-textColor opacity-90 items-center flex font-saira font-semibold transition-colors hover:text-secondary"
                           >
-                            <IoMdArrowDropright className="text-xl" />
+                            <IoMdArrowDropright className="text-lg lg:text-xl" />
                             {skill}
                           </h4>
                         ))}

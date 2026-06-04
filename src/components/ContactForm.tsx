@@ -68,7 +68,7 @@ export const ContactForm = () => {
       <div className="w-full px-8 py-5 pb-10 mx-auto overflow-hidden bg-primary rounded-xl">
         <form className="mt-4 w-full" onSubmit={formik.handleSubmit}>
           <div className="flex-1">
-            <label className="block mb-2 text-md text-textColor font-saira">
+            <label className="block mb-2 text-sm text-textColor font-saira tracking-wide">
               Full Name
             </label>
             <input
@@ -78,14 +78,14 @@ export const ContactForm = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="John Doe"
-              className="block w-full px-5 py-3 mt-2 text-white border rounded-md bg-gray-900 border-secondary focus:border-secondary focus:ring-secondary focus:ring-opacity-40 focus:outline-none focus:ring font-syne"
+              className="block w-full px-4 py-2 mt-2 text-sm text-white border rounded-md bg-gray-900 border-secondary/50 focus:border-secondary focus:ring-secondary focus:ring-opacity-40 focus:outline-none focus:ring font-syne"
             />
             {formik.touched.name && formik.errors.name ? (
               <div className="text-red-500 pt-2 pl-2">{formik.errors.name}</div>
             ) : null}
           </div>
           <div className="flex-1 mt-6">
-            <label className="block mb-2 text-md text-textColor font-saira">
+            <label className="block mb-2 text-sm text-textColor font-saira tracking-wide">
               Email address
             </label>
             <input
@@ -95,18 +95,18 @@ export const ContactForm = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="johndoe@example.com"
-              className="block w-full px-5 py-3 mt-2 text-white border rounded-md bg-gray-900 border-secondary focus:border-secondary focus:ring-secondary focus:ring-opacity-40 focus:outline-none focus:ring font-syne"
+              className="block w-full px-4 py-2 mt-2 text-sm text-white border rounded-md bg-gray-900 border-secondary/50 focus:border-secondary focus:ring-secondary focus:ring-opacity-40 focus:outline-none focus:ring font-syne"
             />
             {formik.touched.email && formik.errors.email ? (
               <div className="text-red-500 pt-2 pl-2">{formik.errors.email}</div>
             ) : null}
           </div>
           <div className="w-full mt-6">
-            <label className="block mb-2 text-md text-textColor font-saira">
+            <label className="block mb-2 text-sm text-textColor font-saira tracking-wide">
               Message
             </label>
             <textarea
-              className="block w-full h-32 px-5 py-3 mt-2 text-white placeholder-gray-400 border border-secondary rounded-md md:h-48 bg-gray-900 focus:border-secondary focus:ring-secondary focus:ring-opacity-40 focus:outline-none focus:ring font-syne"
+              className="block w-full h-32 px-4 py-2 mt-2 text-sm text-white placeholder-gray-400 border border-secondary/50 rounded-md bg-gray-900 focus:border-secondary focus:ring-secondary focus:ring-opacity-40 focus:outline-none focus:ring font-syne resize-none"
               placeholder="Message"
               name="message"
               value={formik.values.message}
@@ -119,9 +119,9 @@ export const ContactForm = () => {
           </div>
           <button
             type="submit"
-            className={`w-full px-6 py-3 mt-6 text-md font-medium tracking-wide capitalize transition-colors duration-300 transform rounded-md focus:outline-none focus:ring focus:ring-blue-400 focus:ring-opacity-50 font-saira ${!formik.isValid
+            className={`w-full px-6 py-2 mt-6 text-sm font-medium tracking-wide capitalize transition-colors duration-300 transform rounded-md focus:outline-none focus:ring focus:ring-secondary focus:ring-opacity-50 font-saira ${!formik.isValid
               ? "bg-gray-400 text-gray-700 cursor-not-allowed"
-              : "bg-secondary text-black hover:bg-opacity-75 hover:text-white"
+              : "bg-secondary text-primary hover:bg-opacity-90"
               }`}
             disabled={!formik.isValid || loading}
           >
