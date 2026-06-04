@@ -1,0 +1,18 @@
+export const featuredProjects = [
+  'Nebula',
+  'movie-site',
+  'knock-knock',
+  'International-Day',
+  'Family-Grocery-List',
+  'eCommerce-nextjs',
+  'e-commerce',
+  '360-supports',
+  'BauhausClock',
+  'dnd-gallary',
+  'pixel-craft',
+  'portfolio',
+  'shihab-nextjs',
+  'tshirt-visualizer',
+  'video-site',
+  'dev-environment-setup',
+];
