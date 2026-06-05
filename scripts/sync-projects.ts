@@ -98,7 +98,11 @@ const run = async () => {
 
   const generatedProjects = [];
 
-  for (const repoName of featuredProjects) {
+  for (const item of featuredProjects) {
+    const repoName = typeof item === 'string' ? item : item.name;
+    const configImgSrc = typeof item === 'string' ? undefined : item.imgSrc;
+    const configErrorImgSrc = typeof item === 'string' ? undefined : item.errorImgSrc;
+
     console.log(`Processing: ${repoName}`);
     const repo = allRepos.find((r: any) => r.name === repoName);
     if (!repo) {
@@ -153,8 +157,8 @@ const run = async () => {
       title: repo.name,
       description: description || 'No description provided.',
       technologies,
-      imgSrc: matchedManualProject?.imgSrc || `https://opengraph.githubassets.com/1/${USERNAME}/${repo.name}`,
-      errorImgSrc: matchedManualProject?.errorImgSrc || 'https://i.ibb.co/8D6gDxb/portfolio.png',
+      imgSrc: configImgSrc || matchedManualProject?.imgSrc || `https://opengraph.githubassets.com/1/${USERNAME}/${repo.name}`,
+      errorImgSrc: configErrorImgSrc || matchedManualProject?.errorImgSrc || 'https://i.ibb.co/8D6gDxb/portfolio.png',
       links
     });
   }
