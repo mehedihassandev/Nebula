@@ -10,7 +10,9 @@ export const StatusBar = () => {
         </div>
         <div className="flex items-center gap-1 hover:bg-hover px-2 h-full cursor-pointer transition-colors">
           <VscSync />
-          <span>main*</span>
+          <span className="truncate max-w-[200px] sm:max-w-[300px] lg:max-w-[500px]" title={process.env.NEXT_PUBLIC_GIT_COMMIT_MSG || 'main*'}>
+            {process.env.NEXT_PUBLIC_GIT_COMMIT_MSG || 'main*'}
+          </span>
         </div>
         <div className="flex items-center gap-2 hover:bg-hover px-2 h-full cursor-pointer transition-colors">
           <div className="flex items-center gap-1"><VscError className="text-accentRed" /> 0</div>

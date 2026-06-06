@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import { VscSearch } from 'react-icons/vsc';
 import { menus } from '@constants/menu';
 import { IMenu } from '@models/Menu';
+import { SHORTCUTS, checkShortcut } from '@constants/shortcuts';
 
 export const CommandPalette = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,14 +15,14 @@ export const CommandPalette = () => {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (
-        (e.metaKey || e.ctrlKey) &&
-        (e.key.toLowerCase() === 'p' || e.code === 'KeyP')
+        checkShortcut(e, SHORTCUTS.COMMAND_PALETTE_P) ||
+        checkShortcut(e, SHORTCUTS.COMMAND_PALETTE_K)
       ) {
         e.preventDefault();
         e.stopPropagation();
         setIsOpen((prev) => !prev);
       }
-      if (e.key === 'Escape') setIsOpen(false);
+      if (checkShortcut(e, SHORTCUTS.ESCAPE)) setIsOpen(false);
     };
 
     window.addEventListener('keydown', handleKeyDown, { capture: true });
@@ -48,17 +49,17 @@ export const CommandPalette = () => {
   useEffect(() => {
     const handleNavigationKeys = (e: KeyboardEvent) => {
       if (!isOpen) return;
-      if (e.key === 'ArrowDown') {
+      if (checkShortcut(e, SHORTCUTS.DOWN)) {
         e.preventDefault();
         setSelectedIndex((prev) => (prev + 1) % filteredMenus.length);
       }
-      if (e.key === 'ArrowUp') {
+      if (checkShortcut(e, SHORTCUTS.UP)) {
         e.preventDefault();
         setSelectedIndex(
           (prev) => (prev - 1 + filteredMenus.length) % filteredMenus.length
         );
       }
-      if (e.key === 'Enter' && filteredMenus.length > 0) {
+      if (checkShortcut(e, SHORTCUTS.ENTER) && filteredMenus.length > 0) {
         e.preventDefault();
         handleNavigate(filteredMenus[selectedIndex].path);
       }

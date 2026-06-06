@@ -64,7 +64,7 @@ export const GitPanel = () => {
       <div className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col custom-scrollbar">
         
         {/* CHANGES SECTION */}
-        <div className="flex flex-col border-b border-border/30">
+        <div className="flex flex-col">
           <div 
             className="flex items-center justify-between px-1 py-1 hover:bg-hover cursor-pointer text-xs font-semibold uppercase tracking-wider text-textColor"
             onClick={() => toggleSection('changes')}
@@ -136,7 +136,7 @@ export const GitPanel = () => {
 
         <div className="mt-auto">
           {/* GRAPH SECTION */}
-          <div className="flex flex-col border-t border-border/30">
+          <div className="flex flex-col">
           <div 
             className="flex items-center justify-between px-1 py-1 hover:bg-hover cursor-pointer text-xs font-semibold uppercase tracking-wider text-textColor"
             onClick={() => toggleSection('graph')}
@@ -225,15 +225,6 @@ export const GitPanel = () => {
           )}
         </div>
 
-        </div>
-
-      </div>
-
-      {/* Footer Info (Branch / Sync) */}
-      <div className="flex justify-between items-center px-4 py-2 text-xs border-t border-border bg-surface shrink-0">
-        <div className="flex items-center gap-2 hover:text-white cursor-pointer transition-colors text-textMuted">
-          <VscGitCommit size={14} />
-          <span>{loading || !commits.length ? 'main' : `${commits[0].commit.author.name} (${getRelativeTime(commits[0].commit.author.date)})`}</span>
         </div>
       </div>
     </div>

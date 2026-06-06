@@ -69,7 +69,7 @@ export const ContactForm = () => {
         <form className="w-full" onSubmit={formik.handleSubmit}>
           <div className="flex-1 pb-[24px]">
             <label className="block mb-2 text-[10px] uppercase tracking-widest text-secondary/60 font-mono">
-              // Full Name
+              Full Name
             </label>
             <input
               type="text"
@@ -86,7 +86,7 @@ export const ContactForm = () => {
           </div>
           <div className="flex-1 pb-[24px]">
             <label className="block mb-2 text-[10px] uppercase tracking-widest text-secondary/60 font-mono">
-              // Email Address
+              Email Address
             </label>
             <input
               type="email"
@@ -103,7 +103,7 @@ export const ContactForm = () => {
           </div>
           <div className="w-full pb-[24px]">
             <label className="block mb-2 text-[10px] uppercase tracking-widest text-secondary/60 font-mono">
-              // Message
+              Message
             </label>
             <textarea
               className="block w-full h-[144px] py-4 text-sm text-white placeholder-white/20 bg-transparent border-b border-white/10 focus:border-secondary focus:outline-none font-sans resize-none transition-all duration-300"

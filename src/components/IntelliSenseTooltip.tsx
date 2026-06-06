@@ -32,11 +32,11 @@ export const IntelliSenseTooltip = ({
     <>
       <span 
         ref={spanRef}
-        className="relative inline-block cursor-help group z-[99999]"
+        className="relative inline-block cursor-help group z-10"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <span className="text-white hover:text-secondary border-b border-white/30 hover:border-secondary transition-all duration-300 relative z-[99999]">
+        <span className="text-white hover:text-secondary border-b border-white/30 hover:border-secondary transition-all duration-300 relative z-10">
           {children}
         </span>
       </span>

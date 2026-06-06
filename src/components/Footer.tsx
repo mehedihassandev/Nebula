@@ -15,7 +15,7 @@ export const Footer = () => {
   return (
     <div>
       <div className="pb-6">
-        <h3 className="text-[10px] uppercase tracking-widest text-secondary/60 font-mono mb-2">// Location</h3>
+        <h3 className="text-[10px] uppercase tracking-widest text-secondary/60 font-mono mb-2">Location</h3>
         <p className="text-white/80 text-xs font-mono">
           Dhaka, Bangladesh
         </p>

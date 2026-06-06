@@ -4,18 +4,30 @@ import { Layout } from '@components/ClientLayout';
 import { Providers } from './providers';
 import { Inter, Outfit, Fira_Code } from 'next/font/google';
 
-const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
-const outfit = Outfit({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
-const firaCode = Fira_Code({ subsets: ['latin'], variable: '--font-mono', display: 'swap' });
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-sans',
+  display: 'swap'
+});
+const outfit = Outfit({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap'
+});
+const firaCode = Fira_Code({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  display: 'swap'
+});
 
 export const metadata = {
-  title: 'Md. Mehedi Hassan | Frontend Engineer',
+  title: 'Md. Mehedi Hassan | Software Engineer',
   description:
-    'Portfolio of Md. Mehedi Hassan, an experienced Frontend Engineer specializing in React, React Native, and building robust enterprise software.',
+    'Portfolio of Md. Mehedi Hassan, an experienced Software Engineer specializing in React, React Native, and building robust enterprise software.',
   openGraph: {
     title: 'Md. Mehedi Hassan | Software Engineer',
     description:
-      'Portfolio of Md. Mehedi Hassan, an experienced Frontend Engineer specializing in React, React Native, and building robust enterprise software.',
+      'Portfolio of Md. Mehedi Hassan, an experienced Software Engineer specializing in React, React Native, and building robust enterprise software.',
     siteName: 'Md. Mehedi Hassan Portfolio',
     type: 'website'
   }
@@ -36,7 +48,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${outfit.variable} ${firaCode.variable} font-sans antialiased`}>
+      <body
+        className={`${inter.variable} ${outfit.variable} ${firaCode.variable} font-sans antialiased`}
+      >
         <Providers>
           <Layout>{children}</Layout>
         </Providers>

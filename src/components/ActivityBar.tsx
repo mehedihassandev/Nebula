@@ -85,9 +85,17 @@ export const ActivityBar = ({
       <div className="flex flex-col w-full gap-2">
         <NavButton tab="explorer" Icon={FiFile} />
         <NavButton tab="search" Icon={FiSearch} />
-        <NavButton tab="extensions" Icon={FiGrid} badge={extensionUpdates > 0 ? extensionUpdates : undefined} />
-        <NavButton tab="git" Icon={FiGitBranch} badge={gitChanges > 0 ? gitChanges : undefined} />
-        <NavButton tab="debug" Icon={FiTerminal} />
+        <NavButton
+          tab="extensions"
+          Icon={FiGrid}
+          badge={extensionUpdates > 0 ? extensionUpdates : undefined}
+        />
+        <NavButton
+          tab="git"
+          Icon={FiGitBranch}
+          badge={gitChanges > 0 ? gitChanges : undefined}
+        />
+        {/* <NavButton tab="debug" Icon={FiTerminal} /> */}
       </div>
 
       <div className="flex flex-col w-full gap-2">
