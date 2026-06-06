@@ -1,37 +1,40 @@
 "use client";
+import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { VscTerminal, VscFileCode, VscSymbolMisc, VscClose } from 'react-icons/vsc';
-import { FaReact } from 'react-icons/fa';
+import { VscClose } from 'react-icons/vsc';
+import { menus } from '@constants/menu';
+import { iconHash } from '@utils/icons';
+import { IMenu } from '@models/Menu';
 
 export const EditorTabs = () => {
   const pathname = usePathname();
-  
-  const getTabInfo = () => {
-    switch(pathname) {
-      case '/':
-        return { name: 'home.tsx', icon: <FaReact className="text-[#61DAFB] text-lg" /> };
-      case '/about':
-        return { name: 'about.tsx', icon: <FaReact className="text-[#61DAFB] text-lg" /> };
-      case '/experience':
-        return { name: 'experience.json', icon: <VscFileCode className="text-[#CBCB41] text-lg" /> };
-      case '/project':
-        return { name: 'projects.ts', icon: <VscTerminal className="text-[#3178C6] text-lg" /> };
-      case '/contact':
-        return { name: 'contact.css', icon: <VscSymbolMisc className="text-[#2965F1] text-lg" /> };
-      default:
-        return { name: 'page.tsx', icon: <FaReact className="text-[#61DAFB] text-lg" /> };
-    }
-  };
-
-  const { name, icon } = getTabInfo();
 
   return (
-    <div className="w-full h-12 flex items-end px-2 sm:px-6 select-none z-20 sticky top-0 bg-primary/80 backdrop-blur-md border-b border-white/5">
-      <div className="px-4 py-3 flex items-center gap-2 relative border-b-[1px] border-secondary text-white">
-        <span className="opacity-80">{icon}</span>
-        <span className="text-sm font-saira tracking-wider opacity-90">{name}</span>
-        <VscClose className="ml-4 text-sm opacity-40 hover:opacity-100 hover:text-secondary transition-all cursor-pointer" />
-      </div>
+    <div className="flex w-full h-[35px] bg-surface/50 backdrop-blur-xl select-none z-20 overflow-x-auto no-scrollbar">
+      {menus.map((item: IMenu, index: number) => {
+        const isActive = pathname === item.path;
+        return (
+          <Link
+            href={item.path}
+            key={index}
+            className={`flex items-center min-w-[120px] max-w-[200px] px-3 h-full gap-2 transition-colors group ${
+              isActive 
+                ? 'bg-white/[0.08] text-textColor border-t-[2px] border-t-accent' 
+                : 'bg-transparent text-textMuted hover:bg-white/[0.04] border-t-[2px] border-t-transparent'
+            }`}
+          >
+            <span className={`text-[14px] ${isActive ? 'opacity-100' : 'opacity-70'}`}>
+              {iconHash[item.icon as keyof typeof iconHash]}
+            </span>
+            <span className={`text-[13px] font-sans truncate flex-1 ${isActive ? 'text-accent' : ''}`}>
+              {item.name}
+            </span>
+            <span className={`w-5 h-5 flex items-center justify-center rounded transition-colors ${isActive ? 'opacity-100 hover:bg-hover' : 'opacity-0 group-hover:opacity-100 hover:bg-hover'}`}>
+              <VscClose size={14} />
+            </span>
+          </Link>
+        );
+      })}
     </div>
   );
 };

@@ -21,17 +21,17 @@ export const HomeClient = ({ projectsCount }: { projectsCount: number }) => {
   return (
     <section
       id="home"
-      className="w-full h-full flex-1 flex flex-col justify-center"
+      className="w-full h-full flex-1 flex flex-col justify-start"
     >
-      <div className="w-full h-full items-center px-7 lg:px-10 overflow-hidden grid grid-cols-3 gap-2 align-middle">
-        <div className="col-span-6 xl:col-span-2 lg:py-8 lg:py-24 mt-2 lg:mt-32 xl:mt-0 px-5">
-          <div className="h-full">
+      <div className="w-full h-full items-start overflow-hidden grid grid-cols-3 gap-2">
+        <div className="col-span-6 xl:col-span-2">
+          <div className="h-[112px] lg:h-[128px]">
             <svg width="100%" height="100%">
               <text
                 x="50%"
                 y="60%"
                 textAnchor="middle"
-                className="font-poppins tracking-[15px] lg:tracking-[30px] text-6xl lg:text-[100px] font-light welcome opacity-90"
+                className="font-display tracking-[15px] lg:tracking-[30px] text-6xl lg:text-[100px] font-light welcome opacity-90"
               >
                 Welcome
               </text>
@@ -57,11 +57,11 @@ export const HomeClient = ({ projectsCount }: { projectsCount: number }) => {
               animate={{ filter: isLoading ? 'blur(10px)' : '' }}
             />
           </div>
-          <div className="mt-8 lg:mt-0 w-[95%]">
-            <span className="block mb-3 text-[10px] lg:text-xs text-white/30 font-mono tracking-widest uppercase cursor-pointer hover:text-white/80 transition-colors">
+          <div className="mt-7 lg:mt-0 w-[95%]">
+            <motion.span initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="block mb-7 lg:mb-8 text-[10px] lg:text-xs text-white/30 font-mono tracking-widest uppercase cursor-pointer hover:text-white/80 transition-colors leading-7 lg:leading-8">
               {projectsCount} Projects | {experience.length} Roles
-            </span>
-            <p className="text-sm lg:text-base leading-loose lg:leading-8 text-textColor font-syne">
+            </motion.span>
+            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="text-base lg:text-[17px] text-textColor/90 font-sans leading-7 lg:leading-8">
               I am an experienced{' '}
               <IntelliSenseTooltip
                 keyword="React"
@@ -121,19 +121,19 @@ export const HomeClient = ({ projectsCount }: { projectsCount: number }) => {
               business needs. Whether on the web or mobile, my ultimate goal is
               to deliver intuitive, fluid user experiences while maintaining
               clean, future-proof code.
-            </p>
+            </motion.p>
           </div>
-          {/* <div className="grid grid-cols-1 lg:grid-cols-3 justify-between gap-7 items-center mt-7 lg:mt-16 xl:mt-24">
-            <h2 className="text-2xl lg:text-3xl xl:text-5xl text-secondary font-saira leading-3 xl:leading-9 font-semibold">2 + <br /> <span className="text-lg lg:text-lg text-white font-normal font-syne">Years of Experience</span></h2>
-            <h2 className="text-2xl lg:text-3xl xl:text-5xl text-secondary font-saira leading-3 xl:leading-9 font-semibold">150+ <br /> <span className="text-lg lg:text-lg text-white font-normal font-syne">Projects completed</span></h2>
-            <h2 className="text-2xl lg:text-3xl xl:text-5xl text-secondary font-saira leading-3 xl:leading-9 font-semibold">100% <br /> <span className="text-lg lg:text-lg text-white font-normal font-syne">Client Satisfactions</span></h2>
+          {/* <div className="grid grid-cols-1 lg:grid-cols-3 justify-between gap-[24px] items-center mt-7 lg:mt-[48px] xl:mt-[48px]">
+            <h2 className="text-2xl lg:text-3xl xl:text-5xl text-secondary font-display leading-tight font-semibold">2 + <br /> <span className="text-lg lg:text-lg text-white font-normal font-sans leading-7 lg:leading-8">Years of Experience</span></h2>
+            <h2 className="text-2xl lg:text-3xl xl:text-5xl text-secondary font-display leading-tight font-semibold">150+ <br /> <span className="text-lg lg:text-lg text-white font-normal font-sans leading-7 lg:leading-8">Projects completed</span></h2>
+            <h2 className="text-2xl lg:text-3xl xl:text-5xl text-secondary font-display leading-tight font-semibold">100% <br /> <span className="text-lg lg:text-lg text-white font-normal font-sans leading-7 lg:leading-8">Client Satisfactions</span></h2>
           </div> */}
         </div>
-        <div className="hidden xl:block">
+        <div className="hidden xl:block mt-[64px]">
           <motion.img
             src="https://i.ibb.co.com/GspdVzQ/IMG-20231130-WA0007-2-1.jpg"
             alt="Md. Mehedi Hassan - Frontend Engineer"
-            className={`w-full h-[600px] overflow-hidden object-cover rounded-2xl border border-white/5 ${isLoading ? 'blur-2xl opacity-30' : 'opacity-100'}`}
+            className={`w-full h-[512px] overflow-hidden object-cover rounded-2xl border border-white/5 ${isLoading ? 'blur-2xl opacity-30' : 'opacity-100'}`}
             style={{ filter: isLoading ? 'blur(10px)' : 'grayscale(100%)' }}
             animate={{ filter: isLoading ? 'blur(10px)' : 'grayscale(100%)' }}
             whileHover={{

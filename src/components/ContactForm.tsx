@@ -64,12 +64,12 @@ export const ContactForm = () => {
   });
 
   return (
-    <div className="relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm shadow-xl p-8 lg:p-10">
+    <div className="relative w-full">
       <div className="w-full mx-auto">
         <form className="w-full" onSubmit={formik.handleSubmit}>
-          <div className="flex-1">
-            <label className="block mb-3 text-xs uppercase tracking-widest text-secondary/60 font-mono">
-              Full Name
+          <div className="flex-1 pb-[24px]">
+            <label className="block mb-2 text-[10px] uppercase tracking-widest text-secondary/60 font-mono">
+              // Full Name
             </label>
             <input
               type="text"
@@ -77,16 +77,16 @@ export const ContactForm = () => {
               value={formik.values.name}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              placeholder="John Doe"
-              className="block w-full px-5 py-3 mt-2 text-sm text-white placeholder-white/20 border-b border-white/10 bg-transparent focus:border-secondary focus:outline-none font-syne transition-colors"
+              placeholder="Enter your name"
+              className="block w-full h-[48px] text-sm text-white placeholder-white/20 bg-transparent border-b border-white/10 focus:border-secondary focus:outline-none font-sans transition-all duration-300"
             />
             {formik.touched.name && formik.errors.name ? (
-              <div className="text-red-500 pt-2 pl-2">{formik.errors.name}</div>
+              <div className="text-red-500 pt-2 text-xs font-mono">{formik.errors.name}</div>
             ) : null}
           </div>
-          <div className="flex-1 mt-6">
-            <label className="block mb-3 text-xs uppercase tracking-widest text-secondary/60 font-mono">
-              Email address
+          <div className="flex-1 pb-[24px]">
+            <label className="block mb-2 text-[10px] uppercase tracking-widest text-secondary/60 font-mono">
+              // Email Address
             </label>
             <input
               type="email"
@@ -95,37 +95,37 @@ export const ContactForm = () => {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               placeholder="johndoe@example.com"
-              className="block w-full px-5 py-3 mt-2 text-sm text-white placeholder-white/20 border-b border-white/10 bg-transparent focus:border-secondary focus:outline-none font-syne transition-colors"
+              className="block w-full h-[48px] text-sm text-white placeholder-white/20 bg-transparent border-b border-white/10 focus:border-secondary focus:outline-none font-sans transition-all duration-300"
             />
             {formik.touched.email && formik.errors.email ? (
-              <div className="text-red-500 pt-2 pl-2">{formik.errors.email}</div>
+              <div className="text-red-500 pt-2 text-xs font-mono">{formik.errors.email}</div>
             ) : null}
           </div>
-          <div className="w-full mt-6">
-            <label className="block mb-3 text-xs uppercase tracking-widest text-secondary/60 font-mono">
-              Message
+          <div className="w-full pb-[24px]">
+            <label className="block mb-2 text-[10px] uppercase tracking-widest text-secondary/60 font-mono">
+              // Message
             </label>
             <textarea
-              className="block w-full h-32 px-5 py-3 mt-2 text-sm text-white placeholder-white/20 border border-white/10 rounded-xl bg-black/20 focus:border-secondary focus:outline-none font-syne resize-none transition-colors"
-              placeholder="Message"
+              className="block w-full h-[144px] py-4 text-sm text-white placeholder-white/20 bg-transparent border-b border-white/10 focus:border-secondary focus:outline-none font-sans resize-none transition-all duration-300"
+              placeholder="Write your message here..."
               name="message"
               value={formik.values.message}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             ></textarea>
             {formik.touched.message && formik.errors.message ? (
-              <div className="text-red-500 pt-2 pl-2">{formik.errors.message}</div>
+              <div className="text-red-500 pt-2 text-xs font-mono">{formik.errors.message}</div>
             ) : null}
           </div>
           <button
             type="submit"
-            className={`w-full px-6 py-4 mt-8 text-xs font-mono tracking-widest uppercase transition-all duration-300 transform rounded-xl focus:outline-none flex items-center justify-center ${!formik.isValid
-              ? "border border-white/10 text-white/30 bg-transparent cursor-not-allowed"
-              : "border border-secondary/30 text-secondary bg-secondary/10 hover:bg-secondary/20 hover:border-secondary/50 hover:shadow-[0_0_20px_rgba(20,255,236,0.2)]"
+            className={`w-full h-[48px] text-[10px] font-mono tracking-widest uppercase transition-all duration-300 flex items-center justify-center ${!formik.isValid
+              ? "border border-white/5 text-white/30 bg-transparent cursor-not-allowed"
+              : "border border-secondary/30 text-secondary bg-secondary/10 hover:bg-secondary/20 hover:border-secondary/50"
               }`}
             disabled={!formik.isValid || loading}
           >
-            {loading ? "Sending..." : "Get in touch"}
+            {loading ? "Transmitting..." : "Execute Connection"}
           </button>
         </form>
 

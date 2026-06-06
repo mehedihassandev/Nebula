@@ -3,10 +3,10 @@ export const Header = () => {
     <div className="py-6">
       {/* <p className="text-sm text-secondary pb-1 ">Hi, my name is</p> */}
       {/* <img src="https://i.ibb.co/dKxMcmd/me.jpg" alt="Md. Mehedi Hassan" className="w-[424px] h-[500px] rounded-xl mb-8" /> */}
-      <h1 className="text-3xl lg:text-4xl font-saira font-semibold tracking-wider bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent pb-1">
+      <h1 className="text-3xl lg:text-4xl font-display font-semibold tracking-wider bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent pb-1">
         Md. Mehedi Hassan
       </h1>
-      <p className="text-base lg:text-lg font-syne text-textColor opacity-90 mt-1">
+      <p className="text-base lg:text-lg font-sans text-textColor opacity-90 mt-1">
         Software Engineer
       </p>
 
@@ -15,7 +15,7 @@ export const Header = () => {
           color: "#fff",
           scale: 1.05,
         }}
-        className="text-[0.9rem] leading-6 pt-4 text-[#94A3B8]"
+        className="text-[0.9rem] leading-6 pt-4 text-textMuted"
       >
         I am <span className="text-secondary">React developer</span> with
         experience who specializes in creating responsive, dynamic websites.

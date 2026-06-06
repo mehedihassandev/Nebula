@@ -30,5 +30,11 @@ export const skills: ISkill[] = [
   },
   {
     name: 'Frame Motion'
+  },
+  {
+    name: 'macOS'
+  },
+  {
+    name: 'Linux'
   }
 ];

@@ -50,16 +50,16 @@ const calculateDuration = (dateString: string) => {
 
 export const Experience = () => {
   return (
-    <div className="w-full h-full flex-1 grid grid-cols items-center px-4 lg:px-4 py-6 lg:py-0">
-      <div className="max-w-screen-2xl">
+    <div className="w-full flex-1 grid grid-cols items-start">
+      <div className="w-full">
         {/* <h1 className="text-2xl lg:text-3xl font-normal tracking-wide text-white font-saira pb-8 pl-4 lg:pl-0">
           <span className="text-secondary opacity-70 mr-3">//</span> Experience
         </h1> */}
 
         <div className="w-full">
-          <div className="px-4 lg:px-4">
-            <div className="grid gap-4 mx-0 lg:mx-4 grid-cols-1 mt-4">
-              <span className="block mb-4 text-[10px] lg:text-xs text-white/30 font-mono tracking-widest uppercase cursor-pointer hover:text-white/80 transition-colors">
+          <div className="w-full">
+            <div className="grid gap-7 lg:gap-8 grid-cols-1">
+              <span className="block mb-7 lg:mb-8 text-[10px] lg:text-xs text-white/30 font-mono tracking-widest uppercase cursor-pointer hover:text-white/80 transition-colors leading-7 lg:leading-8">
                 {experience.length} Roles | {new Date().getFullYear() - 2021}+
                 Years Experience
               </span>
@@ -72,23 +72,19 @@ export const Experience = () => {
                       viewport={{ once: true, margin: '-50px' }}
                       transition={{ duration: 0.5, delay: expIndex * 0.1 }}
                       key={exp.id}
-                      className={`flex flex-col group transition-all duration-500 relative pl-0 lg:pl-6 hover:pl-2 lg:hover:pl-8 ${
-                        expIndex !== experience.length - 1
-                          ? 'border-b border-white/5 pb-12'
-                          : ''
-                      }`}
+                      className="flex flex-col md:flex-row gap-y-7 lg:gap-y-8 gap-x-12 relative group"
                     >
-                      <div className="absolute top-0 left-0 w-0.5 h-0 bg-secondary group-hover:h-full transition-all duration-500 ease-in-out opacity-0 group-hover:opacity-100" />
+                      {/* Timeline Connector */}
+                      <div className="hidden md:flex flex-col items-center mt-2 relative z-10 w-[140px] flex-shrink-0">
+                        <time className="text-[11px] lg:text-xs font-mono text-white/40 group-hover:text-secondary transition-colors tracking-widest uppercase leading-7 lg:leading-8">
+                          {exp.date}
+                        </time>
+                        <div className="h-[1px] w-12 bg-gradient-to-r from-secondary/30 to-transparent"></div>
+                      </div>
 
-                      <div className="relative z-10">
-                        <div className="flex items-center gap-3 mb-2">
-                          <time className="text-[10px] lg:text-xs font-mono uppercase text-secondary bg-secondary/10 px-3 py-1 rounded-full border border-secondary/20 tracking-widest block w-max shadow-sm">
-                            {calculateDuration(exp.date)}
-                          </time>
-                          <div className="h-[1px] w-12 bg-gradient-to-r from-secondary/30 to-transparent"></div>
-                        </div>
-                        <h3 className="text-xl lg:text-2xl text-white font-syne pt-2 flex items-center flex-wrap gap-y-2">
-                          <span className="font-semibold tracking-wide font-saira bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent group-hover:from-secondary group-hover:to-secondary/60 transition-all duration-500">
+                      <div className="relative z-10 flex-1">
+                        <h3 className="text-xl lg:text-2xl text-white font-sans pt-0 flex items-center flex-wrap gap-y-2 leading-7 lg:leading-8">
+                          <span className="font-semibold tracking-wide font-display bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent group-hover:from-secondary group-hover:to-secondary/60 transition-all duration-500">
                             <IntelliSenseTooltip
                               keyword={exp.title.replace(/\s+/g, '')}
                               definition={[
@@ -106,7 +102,7 @@ export const Experience = () => {
                         {exp.description.map((desc: string, index: number) => (
                           <p
                             key={index}
-                            className="mt-4 text-textColor text-sm lg:text-base leading-loose lg:leading-8 font-syne opacity-90"
+                            className="mt-7 lg:mt-8 text-textColor text-base lg:text-[17px] leading-7 lg:leading-8 font-sans opacity-90"
                           >
                             {desc}
                           </p>
@@ -118,14 +114,18 @@ export const Experience = () => {
                                 highlight: IExperienceHighlight,
                                 index: number
                               ) => (
-                                <li
+                                <motion.li
                                   key={index}
-                                  className="text-textColor text-sm lg:text-base leading-loose lg:leading-8 font-syne opacity-90 flex items-start gap-3 relative group/item"
+                                  initial={{ opacity: 0, x: -10 }}
+                                  whileInView={{ opacity: 1, x: 0 }}
+                                  viewport={{ once: true }}
+                                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                                  className="text-textColor text-base lg:text-[17px] leading-7 lg:leading-8 font-sans opacity-90 flex items-start gap-3 relative group/item"
                                 >
                                   <div className="absolute left-[9px] top-4 w-px h-[calc(100%-8px)] bg-white/10 group-hover/item:bg-secondary/30 transition-colors" />
                                   <IoMdArrowDropright className="text-secondary mt-1.5 flex-shrink-0 text-xl relative z-10" />
                                   <div className="pb-2">
-                                    <span className="text-white/90 font-semibold font-saira pr-2 tracking-wide">
+                                    <span className="text-white/90 font-semibold font-display pr-2 tracking-wide">
                                       {highlight.title}
                                     </span>
                                     <span className="text-textColor/90">
@@ -133,7 +133,7 @@ export const Experience = () => {
                                     </span>
                                     {highlight.additionalDetail &&
                                       highlight.additionalDetail.length > 0 && (
-                                        <div className="text-textColor font-syne mt-1">
+                                        <div className="text-textColor/80 font-sans mt-0 leading-7 lg:leading-8 text-sm lg:text-base">
                                           {highlight.additionalDetail.map(
                                             (
                                               point: string,
@@ -150,13 +150,13 @@ export const Experience = () => {
                                         </div>
                                       )}
                                   </div>
-                                </li>
+                                </motion.li>
                               )
                             )}
                           </ul>
                         )}
-                        <div className="mt-8 pt-6">
-                          <h3 className="text-[10px] lg:text-xs uppercase tracking-widest text-secondary/60 font-mono mb-4 flex items-center gap-4">
+                        <div className="mt-7 lg:mt-8 pt-7 lg:pt-8">
+                          <h3 className="text-[10px] lg:text-xs uppercase tracking-widest text-secondary/60 font-mono leading-7 lg:leading-8 mb-7 lg:mb-8 flex items-center gap-4">
                             <span>Technologies Used</span>
                             <div className="h-px flex-1 bg-white/5"></div>
                           </h3>
@@ -164,7 +164,7 @@ export const Experience = () => {
                             {exp.skills.map((skill: string, index: number) => (
                               <div
                                 key={index}
-                                className="text-sm lg:text-base text-textColor opacity-90 items-center flex font-saira font-semibold gap-1 transition-colors"
+                                className="text-base lg:text-[17px] text-textColor opacity-90 items-center flex font-sans leading-7 lg:leading-8 font-semibold gap-1 transition-colors"
                               >
                                 <IoMdArrowDropright className="text-lg lg:text-xl text-secondary" />
                                 <IntelliSenseTooltip

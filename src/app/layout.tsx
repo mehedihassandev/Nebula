@@ -2,6 +2,11 @@ import './globals.css';
 import '../App.css';
 import { Layout } from '@components/ClientLayout';
 import { Providers } from './providers';
+import { Inter, Outfit, Fira_Code } from 'next/font/google';
+
+const inter = Inter({ subsets: ['latin'], variable: '--font-sans', display: 'swap' });
+const outfit = Outfit({ subsets: ['latin'], variable: '--font-display', display: 'swap' });
+const firaCode = Fira_Code({ subsets: ['latin'], variable: '--font-mono', display: 'swap' });
 
 export const metadata = {
   title: 'Md. Mehedi Hassan | Frontend Engineer',
@@ -31,7 +36,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${inter.variable} ${outfit.variable} ${firaCode.variable} font-sans antialiased`}>
         <Providers>
           <Layout>{children}</Layout>
         </Providers>

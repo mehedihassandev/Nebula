@@ -5,7 +5,7 @@ export const experience: IExperience[] = [
     id: 1,
     date: 'April 2024 - Present',
     title: 'Hubar Tech Limited',
-    position: 'Frontend Developer',
+    position: 'Frontend Developer (Full-time)',
     description: [
       'Hubar Tech is a software development company specializing in Telecoms Software, a sister company of UK-based Exos Systems Ltd.',
       'Create and maintain essential components inside the Redux and React Typescript frontend framework, which are essential to the functionality of the overall project. Working collaboratively with developers, designers, and product managers, we can ensure that user-centric design principles and diversity are prioritized in our development efforts by advocating for and implementing best practices in web accessibility.'
@@ -45,7 +45,7 @@ export const experience: IExperience[] = [
     id: 2,
     date: 'December 2024 - Present',
     title: '10 Billion',
-    position: 'Frontend Developer',
+    position: 'Frontend Developer (Part-time)',
     description: [
       '10Billion.org is a global organization dedicated to addressing the challenges and opportunities associated with the world’s growing human population.',
       'As a Frontend Developer, I develop and maintain dynamic web applications and mobile platforms using React and React Native. My focus is on creating scalable, high-performance, and responsive user interfaces that facilitate the organization’s core mission.'
@@ -57,7 +57,7 @@ export const experience: IExperience[] = [
     id: 3,
     date: 'July 2023 - April 2024',
     title: 'Hubar Tech Limited',
-    position: 'Frontend Developer - Trainee',
+    position: 'Frontend Developer - Trainee (Full-time)',
     description: [
       'Started as a trainee working on the Point of Sale (POS) system using React.js, Material UI, Redux, and Azure authentication.',
       'Focused on creating dynamic, reusable components and streamlining forms for better data handling and validation across the PCM, E-Bill, and My-Care applications.'
@@ -69,7 +69,7 @@ export const experience: IExperience[] = [
     id: 4,
     date: 'July 2019 - December 2019',
     title: 'Creative IT Institute',
-    position: 'Web Designer',
+    position: 'Web Designer (Full-time)',
     description: [
       'Began my web development journey by acquiring foundational skills in web design. Designed and developed layouts, learning the core principles of responsive design and UI/UX.',
       'This experience laid the groundwork for my deep dive into JavaScript and frontend frameworks.'

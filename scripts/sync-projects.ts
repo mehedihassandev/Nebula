@@ -152,10 +152,12 @@ const run = async () => {
       mp.title.toLowerCase().replace(/[- ]/g, '') === repo.name.toLowerCase().replace(/[- ]/g, '')
     );
 
+    const configDesc = typeof item === 'string' ? undefined : item.description;
+
     generatedProjects.push({
       id: repo.id,
       title: repo.name,
-      description: description || 'No description provided.',
+      description: configDesc || matchedManualProject?.description || description || 'No description provided.',
       technologies,
       imgSrc: configImgSrc || matchedManualProject?.imgSrc || `https://opengraph.githubassets.com/1/${USERNAME}/${repo.name}`,
       errorImgSrc: configErrorImgSrc || matchedManualProject?.errorImgSrc || 'https://i.ibb.co/8D6gDxb/portfolio.png',
