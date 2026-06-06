@@ -1,14 +1,17 @@
-"use client";
-import { motion } from "framer-motion";
-import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../../tailwind.config";
-import { useState } from "react";
+'use client';
+import { motion } from 'framer-motion';
+import resolveConfig from 'tailwindcss/resolveConfig';
+import tailwindConfig from '../../tailwind.config';
+import { useState } from 'react';
+import { IntelliSenseTooltip } from '@components/IntelliSenseTooltip';
+import { projects } from '@constants/projects';
+import { experience } from '@constants/experience';
 
 /**
  * Renders the Home/Landing page of the portfolio.
- * We design this to act as the primary entry point, providing an immediate 
+ * We design this to act as the primary entry point, providing an immediate
  * visual impact and a concise overview of the developer's core competencies.
- * 
+ *
  * @returns The structured Landing page component.
  */
 export const Home = () => {
@@ -16,12 +19,20 @@ export const Home = () => {
   const theme = resolveConfig(tailwindConfig) as any;
 
   return (
-    <section id="home">
-      <div className="w-full h-full lg:h-screen items-center px-7 lg:px-10 overflow-hidden grid grid-cols-3 gap-2 align-middle">
+    <section
+      id="home"
+      className="w-full h-full flex-1 flex flex-col justify-center"
+    >
+      <div className="w-full h-full items-center px-7 lg:px-10 overflow-hidden grid grid-cols-3 gap-2 align-middle">
         <div className="col-span-6 xl:col-span-2 lg:py-8 lg:py-24 mt-2 lg:mt-32 xl:mt-0 px-5">
           <div className="h-full">
             <svg width="100%" height="100%">
-              <text x="50%" y="60%" textAnchor="middle" className="font-poppins tracking-[10px] text-5xl lg:text-[100px] font-bold welcome">
+              <text
+                x="50%"
+                y="60%"
+                textAnchor="middle"
+                className="font-poppins tracking-[15px] lg:tracking-[30px] text-6xl lg:text-[100px] font-light welcome opacity-90"
+              >
                 Welcome
               </text>
             </svg>
@@ -30,44 +41,88 @@ export const Home = () => {
           <div className="block lg:hidden">
             <motion.img
               src="https://i.ibb.co.com/GspdVzQ/IMG-20231130-WA0007-2-1.jpg"
-              alt="about"
-              className="w-[450px] h-auto overflow-hidden "
+              alt="Md. Mehedi Hassan - Software Engineer"
+              className="w-[450px] h-auto overflow-hidden rounded-2xl"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
                 target.onerror = null;
                 target.src =
-                  "https://i.ibb.co.com/GspdVzQ/IMG-20231130-WA0007-2-1.jpg";
+                  'https://i.ibb.co.com/GspdVzQ/IMG-20231130-WA0007-2-1.jpg';
               }}
               loading="lazy"
               onLoad={() => {
-                setIsLoading(false)
+                setIsLoading(false);
               }}
-              style={{ filter: isLoading ? "blur(10px)" : "" }}
-              animate={{ filter: isLoading ? "blur(10px)" : "" }}
+              style={{ filter: isLoading ? 'blur(10px)' : '' }}
+              animate={{ filter: isLoading ? 'blur(10px)' : '' }}
             />
           </div>
-          <p className="text-md lg:text-lg leading-6 mt-8 lg:mt-0 text-textColor font-syne w-[95%]">
-            I am an experienced{" "}
-            <span className="text-secondary font-medium">React</span> and{" "}
-            <span className="text-secondary font-medium">React Native</span>{" "}
-            developer specializing in dynamic, responsive websites, web apps,
-            and cross-platform mobile applications. Leveraging my expertise in{" "}
-            <span className="text-secondary font-medium">JavaScript</span>,{" "}
-            <span className="text-secondary font-medium">TypeScript</span>,{" "}
-            <span className="text-secondary font-medium">Material UI</span>,{" "}
-            <span className="text-secondary font-medium">Tailwind CSS</span>,
-            and <span className="text-secondary font-medium">Redux</span>, I
-            build user-centered, visually appealing applications for both web
-            and mobile platforms. I focus on managing state, creating reusable
-            components, and ensuring seamless integration across the frontend.
-            For mobile apps, I excel at integrating native modules and utilizing
-            libraries like NativeBase and React Navigation. My priorities
-            include enhancing scalability, maximizing performance, and writing
-            adaptable code that supports evolving project needs. Whether on the
-            web or mobile, my goal is to deliver intuitive, fluid user
-            experiences while maintaining high-quality, maintainable, and
-            future-proof code.
-          </p>
+          <div className="mt-8 lg:mt-0 w-[95%]">
+            <span className="block mb-3 text-[10px] lg:text-xs text-white/30 font-mono tracking-widest uppercase cursor-pointer hover:text-white/80 transition-colors">
+              {projects.length} Projects | {experience.length} Roles
+            </span>
+            <p className="text-sm lg:text-base leading-loose lg:leading-8 text-textColor font-syne">
+              I am an experienced{' '}
+              <IntelliSenseTooltip
+                keyword="React"
+                definition={[
+                  { property: 'experience', value: '3+ Years' },
+                  { property: 'proficiency', value: 'Expert' }
+                ]}
+              >
+                React
+              </IntelliSenseTooltip>{' '}
+              and{' '}
+              <IntelliSenseTooltip
+                keyword="ReactNative"
+                definition={[
+                  { property: 'appsBuilt', value: 'Multiple' },
+                  { property: 'platform', value: 'Cross-Platform' }
+                ]}
+              >
+                React Native
+              </IntelliSenseTooltip>{' '}
+              developer specializing in dynamic, scalable web and mobile
+              applications. Leveraging my expertise in{' '}
+              <span className="text-secondary font-medium">JavaScript</span>,{' '}
+              <IntelliSenseTooltip
+                keyword="TypeScript"
+                definition={[
+                  { property: 'strictMode', value: true },
+                  { property: 'loveLevel', value: '100%' }
+                ]}
+              >
+                TypeScript
+              </IntelliSenseTooltip>
+              , <span className="text-secondary font-medium">Material UI</span>,{' '}
+              <IntelliSenseTooltip
+                keyword="TailwindCSS"
+                definition={[{ property: 'utilityFirst', value: true }]}
+              >
+                Tailwind CSS
+              </IntelliSenseTooltip>
+              , and{' '}
+              <IntelliSenseTooltip
+                keyword="Redux"
+                definition={[
+                  { property: 'stateManagement', value: 'Predictable' }
+                ]}
+              >
+                Redux
+              </IntelliSenseTooltip>
+              , I build robust enterprise-grade software (such as POS and PCM
+              systems) as well as high-performance platforms designed to address
+              global challenges. I focus on managing complex state, creating
+              reusable architectures, and ensuring seamless integration across
+              the frontend. For mobile applications, I excel at integrating
+              native modules to deliver native-like experiences. My priorities
+              always center around enhancing scalability, maximizing
+              performance, and writing adaptable code that supports evolving
+              business needs. Whether on the web or mobile, my ultimate goal is
+              to deliver intuitive, fluid user experiences while maintaining
+              clean, future-proof code.
+            </p>
+          </div>
           {/* <div className="grid grid-cols-1 lg:grid-cols-3 justify-between gap-7 items-center mt-7 lg:mt-16 xl:mt-24">
             <h2 className="text-2xl lg:text-3xl xl:text-5xl text-secondary font-saira leading-3 xl:leading-9 font-semibold">2 + <br /> <span className="text-lg lg:text-lg text-white font-normal font-syne">Years of Experience</span></h2>
             <h2 className="text-2xl lg:text-3xl xl:text-5xl text-secondary font-saira leading-3 xl:leading-9 font-semibold">150+ <br /> <span className="text-lg lg:text-lg text-white font-normal font-syne">Projects completed</span></h2>
@@ -77,24 +132,24 @@ export const Home = () => {
         <div className="hidden xl:block">
           <motion.img
             src="https://i.ibb.co.com/GspdVzQ/IMG-20231130-WA0007-2-1.jpg"
-            alt="about"
-            className={`w-full h-[600px] overflow-hidden object-cover ${isLoading ? 'blur-2xl opacity-30' : 'opacity-100'}`}
-            style={{ filter: isLoading ? "blur(10px)" : "grayscale(100%)" }}
-            animate={{ filter: isLoading ? "blur(10px)" : "grayscale(100%)" }}
+            alt="Md. Mehedi Hassan - Frontend Engineer"
+            className={`w-full h-[600px] overflow-hidden object-cover rounded-2xl border border-white/5 ${isLoading ? 'blur-2xl opacity-30' : 'opacity-100'}`}
+            style={{ filter: isLoading ? 'blur(10px)' : 'grayscale(100%)' }}
+            animate={{ filter: isLoading ? 'blur(10px)' : 'grayscale(100%)' }}
             whileHover={{
-              filter: "contrast(130%)",
-              transform: "translateY(-10px) translateX(-10px)",
-              boxShadow: `10px 10px 0px 0px ${theme.theme.colors.secondary}`,
+              filter: 'grayscale(0%) brightness(100%)',
+              transform: 'translateY(-5px)',
+              boxShadow: `0px 20px 40px -10px ${theme.theme.colors.secondary}40`
             }}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
               target.onerror = null;
               target.src =
-                "https://i.ibb.co.com/GspdVzQ/IMG-20231130-WA0007-2-1.jpg";
+                'https://i.ibb.co.com/GspdVzQ/IMG-20231130-WA0007-2-1.jpg';
             }}
             loading="lazy"
             onLoad={() => {
-              setIsLoading(false)
+              setIsLoading(false);
             }}
           />
         </div>

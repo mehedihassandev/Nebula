@@ -26,8 +26,8 @@ export const Menu = ({ setShowSidebar }: { setShowSidebar: (show: boolean) => vo
           <Link
             href={item.path}
             key={index}
-            className={`flex items-center py-[10px] px-[10px] gap-[15px] transition-all duration-500 ${
-              isActive ? 'text-secondary font-semibold' : 'text-textColor'
+            className={`flex items-center py-[10px] px-[10px] gap-[15px] transition-all duration-300 ${
+              isActive ? 'text-secondary font-medium tracking-wide' : 'text-textColor hover:text-white'
             }`}
             onClick={() => setShowSidebar(false)}
           >
