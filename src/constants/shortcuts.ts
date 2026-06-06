@@ -31,6 +31,12 @@ export const SHORTCUTS = {
     ctrlOrMeta: true,
     shift: false
   } as Shortcut,
+  COMMAND_PALETTE_SHIFT_P: {
+    key: 'p',
+    code: 'KeyP',
+    ctrlOrMeta: true,
+    shift: true
+  } as Shortcut,
   COMMAND_PALETTE_K: {
     key: 'k',
     code: 'KeyK',

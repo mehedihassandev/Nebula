@@ -21,18 +21,19 @@ const calculateDuration = (dateString: string) => {
     const endStr = parts[1].trim();
 
     const startDate = new Date(startStr);
-    const endDate = endStr.toLowerCase() === 'present' ? new Date() : new Date(endStr);
-    
+    const endDate =
+      endStr.toLowerCase() === 'present' ? new Date() : new Date(endStr);
+
     let months = (endDate.getFullYear() - startDate.getFullYear()) * 12;
     months -= startDate.getMonth();
     months += endDate.getMonth();
     months += 1; // inclusive of start month
 
     if (months <= 0 || isNaN(months)) return dateString;
-    
+
     const years = Math.floor(months / 12);
     const remainingMonths = months % 12;
-    
+
     let durationStr = '';
     if (years > 0) {
       durationStr += `${years} yr${years > 1 ? 's' : ''}`;
@@ -41,7 +42,7 @@ const calculateDuration = (dateString: string) => {
       if (durationStr) durationStr += ' ';
       durationStr += `${remainingMonths} mo${remainingMonths > 1 ? 's' : ''}`;
     }
-    
+
     return `${dateString} · ${durationStr}`;
   } catch (e) {
     return dateString;
@@ -72,6 +73,7 @@ export const Experience = () => {
                       viewport={{ once: true, margin: '-50px' }}
                       transition={{ duration: 0.5, delay: expIndex * 0.1 }}
                       key={exp.id}
+                      id={`exp-${exp.id}`}
                       className="flex flex-col md:flex-row gap-y-7 lg:gap-y-8 gap-x-12 relative group"
                     >
                       {/* Timeline Connector */}
@@ -119,7 +121,10 @@ export const Experience = () => {
                                   initial={{ opacity: 0, x: -10 }}
                                   whileInView={{ opacity: 1, x: 0 }}
                                   viewport={{ once: true }}
-                                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                                  transition={{
+                                    duration: 0.4,
+                                    delay: index * 0.1
+                                  }}
                                   className="text-textColor text-base lg:text-[17px] leading-7 lg:leading-8 font-sans opacity-90 flex items-start gap-3 relative group/item"
                                 >
                                   <div className="absolute left-[9px] top-4 w-px h-[calc(100%-8px)] bg-white/10 group-hover/item:bg-secondary/30 transition-colors" />

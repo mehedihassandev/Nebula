@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { VscChevronDown, VscChevronRight, VscFolder, VscFolderOpened } from 'react-icons/vsc';
 import { menus } from '@constants/menu';
 import { iconHash } from '@utils/icons';
 import { IMenu } from '@models/Menu';
+import { useTabStore } from '../store/tabStore';
 
 export const Menu = ({ setShowSidebar }: { setShowSidebar: (show: boolean) => void }) => {
   const pathname = usePathname();
+  const router = useRouter();
+  const { openTab } = useTabStore();
   const [srcOpen, setSrcOpen] = useState(true);
   const [appOpen, setAppOpen] = useState(true);
 
@@ -38,21 +40,29 @@ export const Menu = ({ setShowSidebar }: { setShowSidebar: (show: boolean) => vo
 
             {appOpen && (
               <div className="flex flex-col relative before:absolute before:left-[31px] before:top-0 before:bottom-0 before:w-[1px] before:bg-white/5">
-                {menus.map((item: IMenu, index: number) => {
+                {menus
+                  .filter(m => !['package.json', '.gitignore', 'README.md'].includes(m.name))
+                  .map((item: IMenu, index: number) => {
                   const isActive = pathname === item.path;
                   return (
-                    <Link
-                      href={item.path}
+                    <div
                       key={index}
-                      className={`group relative flex items-center py-1 px-2 pl-10 gap-1.5 transition-all ${
+                      className={`group relative flex items-center py-1 px-2 pl-10 gap-1.5 transition-all cursor-pointer select-none ${
                         isActive 
                           ? 'bg-hover/80 text-white before:absolute before:left-0 before:top-0 before:h-full before:w-[2px] before:bg-accent' 
                           : 'text-textColor hover:bg-hover/60 hover:text-white'
                       }`}
                       onClick={() => {
+                        openTab(item);
+                        router.push(item.path);
                         if (window.innerWidth < 768) {
                           setShowSidebar(false);
                         }
+                      }}
+                      onDoubleClick={(e) => {
+                        e.stopPropagation();
+                        openTab(item, true);
+                        router.push(item.path);
                       }}
                     >
                       <span className="opacity-90">
@@ -61,13 +71,49 @@ export const Menu = ({ setShowSidebar }: { setShowSidebar: (show: boolean) => vo
                       <span className={isActive ? "font-medium" : ""}>
                         {item.name}
                       </span>
-                    </Link>
+                    </div>
                   );
                 })}
               </div>
             )}
           </div>
         )}
+
+        {/* Root files */}
+        {menus
+          .filter(m => ['package.json', '.gitignore', 'README.md'].includes(m.name))
+          .map((item: IMenu, index: number) => {
+          const isActive = pathname === item.path;
+          return (
+            <div
+              key={index}
+              className={`group relative flex items-center py-1 px-2 pl-2 gap-1.5 transition-all cursor-pointer select-none ${
+                isActive 
+                  ? 'bg-hover/80 text-white before:absolute before:left-0 before:top-0 before:h-full before:w-[2px] before:bg-accent' 
+                  : 'text-textColor hover:bg-hover/60 hover:text-white'
+              }`}
+              onClick={() => {
+                openTab(item);
+                router.push(item.path);
+                if (window.innerWidth < 768) {
+                  setShowSidebar(false);
+                }
+              }}
+              onDoubleClick={(e) => {
+                e.stopPropagation();
+                openTab(item, true);
+                router.push(item.path);
+              }}
+            >
+              <span className="opacity-90">
+                {iconHash[item.icon as keyof typeof iconHash]}
+              </span>
+              <span className={isActive ? "font-medium" : ""}>
+                {item.name}
+              </span>
+            </div>
+          );
+        })}
       </div>
     </div>
   );

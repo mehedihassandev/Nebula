@@ -1,14 +1,22 @@
 import { VscCheck, VscChevronRight } from 'react-icons/vsc';
 
-export const AccountPanel = () => {
+export const AccountPanel = ({ closePopup }: { closePopup: () => void }) => {
   const glassmorphismClasses =
     'flex flex-col text-textColor bg-primary backdrop-blur-3xl border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.5)] rounded-lg font-sans overflow-hidden py-1 w-64';
+
+  const handleGitHub = () => {
+    closePopup();
+    window.open('https://github.com/mehedihassandev', '_blank');
+  };
 
   return (
     <div className={glassmorphismClasses}>
       <div className="flex flex-col py-2 text-[13px] overflow-y-auto custom-scrollbar">
         {/* Account List */}
-        <div className="flex items-center justify-between px-6 py-1.5 hover:bg-accent hover:text-white cursor-pointer group text-textColor">
+        <div 
+          className="flex items-center justify-between px-6 py-1.5 hover:bg-accent hover:text-white cursor-pointer group text-textColor"
+          onClick={handleGitHub}
+        >
           <span>mehedihassandev (GitHub)</span>
           <VscChevronRight
             size={14}

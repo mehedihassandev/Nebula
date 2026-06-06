@@ -5,27 +5,36 @@ export const menus: IMenu[] = [
   {
     path: ROUTES.HOME,
     name: 'home.tsx',
-    icon: 'dash'
+    icon: 'react'
   },
   {
     path: ROUTES.ABOUT,
     name: 'about.tsx',
-    icon: 'dash'
+    icon: 'react'
   },
   {
     path: ROUTES.EXPERIENCE,
-    // name: "Education & Experience",
     name: 'experience.json',
-    icon: 'dash'
+    icon: 'json'
   },
   {
     path: ROUTES.PROJECT,
     name: 'projects.ts',
-    icon: 'dash'
+    icon: 'typescript'
   },
   {
     path: ROUTES.CONTACT,
     name: 'contact.css',
-    icon: 'dash'
+    icon: 'css'
+  },
+  {
+    path: ROUTES.PACKAGE,
+    name: 'package.json',
+    icon: 'npm'
+  },
+  {
+    path: ROUTES.README,
+    name: 'README.md',
+    icon: 'markdown'
   }
 ];

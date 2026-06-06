@@ -4,11 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { VscTerminal, VscCheck } from 'react-icons/vsc';
 import { FiGitBranch } from 'react-icons/fi';
 import { usePathname } from 'next/navigation';
+import { useAchievementsStore } from '../store/achievementsStore';
 import { SHORTCUTS, checkShortcut } from '@constants/shortcuts';
 
 export const GhostTerminal = () => {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
+  const { unlockBadge } = useAchievementsStore();
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [history, setHistory] = useState<
@@ -23,19 +24,9 @@ export const GhostTerminal = () => {
 
   useEffect(() => {
     scrollToBottom();
-  }, [history, output, isOpen]);
+  }, [history, output]);
 
-  // Keyboard shortcut to toggle terminal (Cmd+J / Ctrl+J)
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (checkShortcut(e, SHORTCUTS.TERMINAL)) {
-        e.preventDefault();
-        setIsOpen((prev) => !prev);
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+
 
   useEffect(() => {
     const val = input.trim();
@@ -90,12 +81,12 @@ export const GhostTerminal = () => {
     setOutput('');
   }, [input]);
 
-  // Focus input when opened
+  // Focus input on mount
   useEffect(() => {
-    if (isOpen && inputRef.current) {
+    if (inputRef.current) {
       setTimeout(() => inputRef.current?.focus(), 100);
     }
-  }, [isOpen]);
+  }, []);
 
   const [systemInfo, setSystemInfo] = useState<{ label: string; value: any }[]>(
     []
@@ -179,8 +170,10 @@ export const GhostTerminal = () => {
     } else if (cmd === 'sudo') {
       newOutput =
         'visitor is not in the sudoers file. This incident will be reported.';
+      unlockBadge('HACKER_MAN');
     } else if (cmd === 'matrix') {
       newOutput = 'Wake up, Neo...';
+      unlockBadge('THE_ONE');
     } else if (cmd === 'repo') {
       newOutput = 'Opening repository in a new tab...';
       window.open('https://github.com/mdmehedihassan', '_blank');
@@ -206,19 +199,19 @@ export const GhostTerminal = () => {
       className={`flex justify-between items-center text-[13px] ${isHistory ? 'opacity-70 mb-0.5' : 'mb-1'}`}
     >
       <div className="flex items-center gap-3">
-        <span className="text-[#ff9e64] font-bold">
+        <span className="text-accent font-bold">
           ~/portfolio{pathname === '/' ? '/home.tsx' : `${pathname}`}
         </span>
-        <span className="text-[#7dcfff] flex items-center gap-1.5">
+        <span className="text-secondary flex items-center gap-1.5">
           <FiGitBranch size={14} /> develop
         </span>
-        <span className="text-[#9ece6a] font-bold flex items-center">
+        <span className="text-secondary font-bold flex items-center">
           <VscCheck size={16} strokeWidth={1} />
         </span>
       </div>
-      <div className="text-[#565f89] text-[11px] uppercase tracking-widest hidden sm:block">
+      <div className="text-textMuted text-[11px] uppercase tracking-widest hidden sm:block">
         via{' '}
-        <span className="text-[#bb9af7] font-bold ml-1 text-[12px] tracking-normal">
+        <span className="text-accent font-bold ml-1 text-[12px] tracking-normal">
           ⬢ v25.3.0
         </span>
       </div>
@@ -226,150 +219,107 @@ export const GhostTerminal = () => {
   );
 
   return (
-    <>
-      {/* Trigger Icon */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="absolute bottom-6 right-6 z-[9999999999999999999] p-3 rounded-full bg-black/20 backdrop-blur-md border border-white/5 text-white/40 hover:text-secondary hover:border-secondary/30 shadow-lg transition-all"
-        title="Ghost Terminal (Cmd/Ctrl + J)"
-      >
-        <VscTerminal size={20} />
-      </button>
+    <div className="w-full h-full bg-primary flex flex-col font-mono text-textColor">
+      <div className="flex-1 overflow-auto p-4 scrollbar-thin scrollbar-thumb-white/10 text-[13px]">
+        {/* Intro / Description */}
+        <div className="mb-6 text-textMuted leading-relaxed">
+          <div className="text-secondary font-bold text-[14px] mb-2 tracking-wide">
+            Portfolio Shell v1.0.0
+          </div>
+          <div className="mb-2">
+            A fully interactive terminal environment.
+          </div>
+          <ul className="list-none space-y-1 ml-1 mb-3 text-secondary/90">
+            <li className="flex items-center gap-2">
+              <span className="text-textMuted/50 text-[10px]">▶</span> Run
+              standard shell commands (ls, pwd, clear)
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-textMuted/50 text-[10px]">▶</span>{' '}
+              Explore my skills and contact info (skills, contact)
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-textMuted/50 text-[10px]">▶</span>{' '}
+              Live-parse JSON, JWT, or Base64 simply by pasting
+            </li>
+          </ul>
+          <div>
+            Type{' '}
+            <span className="text-accent font-semibold">help</span>{' '}
+            to see all available commands.
+          </div>
+        </div>
 
-      {/* Full Screen Overlay to catch clicks outside */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 z-[9999] bg-black/50 backdrop-blur-md flex items-center justify-center p-4 lg:p-6"
-            onClick={(e) => {
-              if (e.target === e.currentTarget) setIsOpen(false);
-            }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.96, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.96, y: 16 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="w-[850px] min-w-[600px] max-w-[95vw] max-h-[85vh] bg-[#0f111a]/85 backdrop-blur-3xl border border-white/10 rounded-2xl overflow-hidden shadow-[0_30px_100px_-20px_rgba(0,0,0,1)] flex flex-col font-mono"
-            >
-              <div className="flex-1 overflow-auto p-5 sm:p-6 lg:p-8 scrollbar-thin scrollbar-thumb-white/10 text-[13px]">
-                {/* Intro / Description */}
-                <div className="mb-8 text-[#a9b1d6] leading-relaxed">
-                  <div className="text-[#7aa2f7] font-bold text-[14px] mb-2 tracking-wide">
-                    Portfolio Shell v1.0.0
-                  </div>
-                  <div className="mb-3">
-                    A fully interactive terminal environment built directly into
-                    my portfolio.
-                  </div>
-                  <ul className="list-none space-y-1.5 ml-1 mb-4 text-[#9ece6a]/90">
-                    <li className="flex items-center gap-2">
-                      <span className="text-white/30 text-[10px]">▶</span> Run
-                      standard shell commands (ls, pwd, clear)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-white/30 text-[10px]">▶</span>{' '}
-                      Explore my skills and contact info (skills, contact)
-                    </li>
-                    <li className="flex items-center gap-2">
-                      <span className="text-white/30 text-[10px]">▶</span>{' '}
-                      Live-parse JSON, JWT, or Base64 simply by pasting
-                    </li>
-                  </ul>
-                  <div>
-                    Type{' '}
-                    <span className="text-[#ff9e64] font-semibold">help</span>{' '}
-                    to see all available commands.
-                  </div>
-                  <div className="text-[#565f89] mt-3 uppercase tracking-widest text-[11px] font-semibold">
-                    Shortcut: Cmd+J / Ctrl+J
-                  </div>
-                </div>
+        {/* System Info */}
+        <div className="flex flex-col gap-1.5 mb-6 text-textMuted leading-relaxed">
+          {systemInfo.map((info, i) => (
+            <div key={i} className="flex">
+              <span className="w-32 text-secondary font-semibold tracking-wide">
+                {info.label}
+              </span>
+              <span className="text-textMuted/50 mr-4">→</span>
+              <span className="flex-1 text-textColor">
+                {info.label === 'Local Time' ? currentTime : info.value}
+              </span>
+            </div>
+          ))}
+        </div>
 
-                {/* System Info */}
-                <div className="flex flex-col gap-2 mb-6 text-[#a9b1d6] leading-relaxed">
-                  {systemInfo.map((info, i) => (
-                    <div key={i} className="flex">
-                      <span className="w-32 text-[#7aa2f7] font-semibold tracking-wide">
-                        {info.label}
-                      </span>
-                      <span className="text-white/30 mr-4">→</span>
-                      <span className="flex-1 text-[#c0caf5]">
-                        {info.label === 'Local Time' ? currentTime : info.value}
-                      </span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Command History */}
-                {history.map((item) => (
-                  <div key={item.id} className="mb-4">
-                    <PromptLine isHistory />
-                    <div className="relative flex items-center mt-1">
-                      <span className="absolute left-2 text-xl opacity-70">
-                        🚀
-                      </span>
-                      <div className="text-[#c0caf5] text-[13px] pl-10 pr-4 py-0.5">
-                        {item.command}
-                      </div>
-                    </div>
-                    {item.output && (
-                      <div className="pl-10 pr-4 mt-1 text-[#a9b1d6] whitespace-pre-wrap overflow-x-auto text-[13px] leading-snug">
-                        {item.output}
-                      </div>
-                    )}
-                  </div>
-                ))}
-
-                {/* Current Prompt */}
-                <PromptLine />
-
-                {/* Input Area */}
-                <form
-                  onSubmit={handleCommand}
-                  className="relative flex items-center group mt-1"
-                >
-                  <span className="absolute left-2 text-xl group-focus-within:animate-pulse transition-all opacity-80 group-focus-within:opacity-100">
-                    🚀
-                  </span>
-                  <input
-                    ref={inputRef}
-                    type="text"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    placeholder="Type 'help' for commands, or paste JSON/JWT/Base64..."
-                    className="w-full bg-transparent border-none outline-none text-[#c0caf5] text-[13px] pl-10 pr-4 py-0.5 placeholder-white/20 transition-colors"
-                    spellCheck="false"
-                    autoComplete="off"
-                  />
-                </form>
-
-                {/* Live Output Area */}
-                <AnimatePresence>
-                  {output && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                      animate={{ opacity: 1, height: 'auto', marginTop: 4 }}
-                      exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                      className="overflow-hidden pl-10 pr-4"
-                    >
-                      <div className="text-[#a9b1d6] whitespace-pre-wrap overflow-x-auto text-[13px] leading-snug">
-                        {output}
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* Dummy div to scroll to bottom */}
-                <div ref={messagesEndRef} className="h-4" />
+        {/* Command History */}
+        {history.map((item) => (
+          <div key={item.id} className="mb-3">
+            <PromptLine isHistory />
+            <div className="relative flex items-center mt-0.5">
+              <span className="absolute left-2 text-lg opacity-70">
+                🚀
+              </span>
+              <div className="text-textColor text-[13px] pl-10 pr-4 py-0.5">
+                {item.command}
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+            {item.output && (
+              <div className="pl-10 pr-4 mt-1 text-textMuted whitespace-pre-wrap overflow-x-auto text-[13px] leading-snug">
+                {item.output}
+              </div>
+            )}
+          </div>
+        ))}
+
+        {/* Current Prompt */}
+        <PromptLine />
+
+        {/* Input Area */}
+        <form
+          onSubmit={handleCommand}
+          className="relative flex items-center group mt-0.5"
+        >
+          <span className="absolute left-2 text-lg group-focus-within:animate-pulse transition-all opacity-80 group-focus-within:opacity-100">
+            🚀
+          </span>
+          <input
+            ref={inputRef}
+            type="text"
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type 'help' for commands, or paste JSON/JWT/Base64..."
+            className="w-full bg-transparent border-none outline-none text-textColor text-[13px] pl-10 pr-4 py-0.5 placeholder-textMuted/50 transition-colors"
+            spellCheck="false"
+            autoComplete="off"
+          />
+        </form>
+
+        {/* Live Output Area */}
+        {output && (
+          <div className="overflow-hidden pl-10 pr-4 mt-2">
+            <div className="text-textMuted whitespace-pre-wrap overflow-x-auto text-[13px] leading-snug">
+              {output}
+            </div>
+          </div>
         )}
-      </AnimatePresence>
-    </>
+
+        {/* Dummy div to scroll to bottom */}
+        <div ref={messagesEndRef} className="h-4" />
+      </div>
+    </div>
   );
 };

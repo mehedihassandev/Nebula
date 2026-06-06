@@ -72,6 +72,7 @@ export const ProjectsClient = ({ projects }: { projects: IProject[] }) => {
           {projects.map((item: IProject, index: number) => (
             <motion.div
               key={item.id}
+              id={`proj-${item.id}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}

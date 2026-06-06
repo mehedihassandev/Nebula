@@ -110,7 +110,7 @@ export const About = () => {
           world of web and mobile development.
         </motion.p>
       </div>
-      <div className="mt-7 lg:mt-8 pt-7 lg:pt-8 pb-7 lg:pb-8">
+      <div className="mt-7 lg:mt-8 pt-7 lg:pt-8 pb-7 lg:pb-8" id="skills">
         <h3 className="text-[10px] lg:text-xs uppercase tracking-widest text-secondary/60 font-mono leading-7 lg:leading-8 mb-7 lg:mb-8 flex items-center gap-4">
           <span>Technologies Used</span>
           <div className="h-px flex-1 max-w-xl bg-white/5"></div>

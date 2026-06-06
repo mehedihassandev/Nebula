@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { TabType } from '../ActivityBar';
 import { Menu } from '../Menu';
-import { Footer } from '../Footer';
 import { SearchPanel } from './SearchPanel';
 import { GitPanel } from './GitPanel';
 import { DebugPanel } from './DebugPanel';
@@ -66,9 +65,6 @@ export const SidebarPanel = ({ activeTab, setActiveTab }: SidebarPanelProps) => 
             </div>
             <div className="flex-1 overflow-y-auto custom-scrollbar">
               <Menu setShowSidebar={(show) => !show && setActiveTab(null)} />
-            </div>
-            <div className="p-4 shrink-0">
-              <Footer />
             </div>
           </>
         );

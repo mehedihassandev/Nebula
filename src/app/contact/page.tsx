@@ -1,6 +1,7 @@
 'use client';
 import { iconHash } from '@utils/icons';
 import { contacts } from '@constants/contacts';
+import { socialLinks } from '@constants/socialLinks';
 import { ContactForm } from '@components/ContactForm';
 import { IContact } from '@models/Contact';
 import { IntelliSenseTooltip } from '@components/IntelliSenseTooltip';
@@ -68,6 +69,26 @@ export const Contact = () => {
               </h2>
             </motion.div>
           ))}
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className="flex items-center gap-6 pt-4"
+          >
+            {socialLinks.map((social) => (
+              <a
+                key={social.icon}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer"
+                className="text-2xl text-white/40 hover:text-white transition-colors duration-300 hover:scale-110 transform"
+              >
+                {iconHash[social.icon as keyof typeof iconHash]}
+              </a>
+            ))}
+          </motion.div>
           </div>
         </div>
 

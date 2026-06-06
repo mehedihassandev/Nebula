@@ -16,13 +16,21 @@ import { CodeWindow } from './CodeWindow';
 import { useThemeStore } from '../store/themeStore';
 import { GhostTerminal } from './GhostTerminal';
 import { SHORTCUTS, checkShortcut } from '@constants/shortcuts';
+import { BottomPanel } from './BottomPanel';
+import { useUiStore } from '../store/uiStore';
+import { AchievementToast } from './AchievementToast';
+import { useAchievementsStore } from '../store/achievementsStore';
+import { useRouter } from 'next/navigation';
 
 export const Layout = ({ children }: { children: React.ReactNode }) => {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<TabType>('explorer');
   const [activePopup, setActivePopup] = useState<PopupType>(null);
   const notify = useNotification();
   const popupRef = useRef<HTMLDivElement>(null);
   const theme = useThemeStore((state) => state.theme);
+  const { toggleBottomPanel, setActiveBottomTab } = useUiStore();
+  const { unlockBadge } = useAchievementsStore();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
@@ -61,6 +69,27 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     };
   }, [notify]);
 
+  // Konami Code Detection
+  useEffect(() => {
+    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+
+    const handleKonami = (e: KeyboardEvent) => {
+      if (e.key === konamiSequence[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiSequence.length) {
+          unlockBadge('KONAMI_CODE');
+          konamiIndex = 0;
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    };
+
+    window.addEventListener('keydown', handleKonami);
+    return () => window.removeEventListener('keydown', handleKonami);
+  }, [unlockBadge]);
+
   useEffect(() => {
     const handleGlobalShortcuts = (e: KeyboardEvent) => {
       if (checkShortcut(e, SHORTCUTS.EXPLORER)) {
@@ -84,7 +113,13 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       if (checkShortcut(e, SHORTCUTS.SETTINGS)) {
         e.preventDefault();
         e.stopPropagation();
-        setActivePopup(activePopup === 'settings' ? null : 'settings');
+        router.push('/settings');
+      }
+      if (checkShortcut(e, SHORTCUTS.TERMINAL)) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleBottomPanel();
+        setActiveBottomTab('TERMINAL');
       }
     };
 
@@ -95,7 +130,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
       window.removeEventListener('keydown', handleGlobalShortcuts, {
         capture: true
       });
-  }, [activePopup]);
+  }, [activePopup, router]);
 
   return (
     <div
@@ -116,8 +151,7 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
             <CodeWindow>{children}</CodeWindow>
             <Analytics />
           </div>
-          {/* Ghost Terminal is constrained to the code window area */}
-          <GhostTerminal />
+          <BottomPanel />
         </main>
 
         {/* Expandable Sidebar Panel */}
@@ -145,9 +179,12 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
                 className={`absolute right-[60px] z-[60] ${activePopup === 'account' ? 'bottom-[66px] w-64' : 'bottom-[16px] w-72'}`}
               >
                 {activePopup === 'account' ? (
-                  <AccountPanel />
+                  <AccountPanel closePopup={() => setActivePopup(null)} />
                 ) : (
-                  <SettingsPanel />
+                  <SettingsPanel 
+                    closePopup={() => setActivePopup(null)} 
+                    setActiveTab={setActiveTab} 
+                  />
                 )}
               </motion.div>
             )}
@@ -160,6 +197,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
       {/* Global Command Palette */}
       <CommandPalette />
+
+      {/* Easter Egg Toasts */}
+      <AchievementToast />
     </div>
   );
 };

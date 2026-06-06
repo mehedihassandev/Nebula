@@ -1,20 +1,23 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { VscSearch, VscChevronRight } from 'react-icons/vsc';
-import { menus } from '@constants/menu';
-import { IMenu } from '@models/Menu';
+import Fuse from 'fuse.js';
+import { globalSearchIndex } from '../../constants/searchIndex';
 
 export const SearchPanel = () => {
   const [query, setQuery] = useState('');
   const router = useRouter();
 
-  const filteredMenus = menus.filter((menu: IMenu) => 
-    menu.name.toLowerCase().includes(query.toLowerCase()) || 
-    menu.path.toLowerCase().includes(query.toLowerCase())
-  );
+  const fuse = useMemo(() => new Fuse(globalSearchIndex, {
+    keys: ['title', 'content'],
+    threshold: 0.4,
+    ignoreLocation: true,
+  }), []);
 
-  const handleNavigate = (path: string) => {
-    router.push(path);
+  const searchResults = query ? fuse.search(query) : [];
+
+  const handleNavigate = (path: string, sectionId?: string) => {
+    router.push(path + (sectionId ? '#' + sectionId : ''));
   };
 
   return (
@@ -37,26 +40,32 @@ export const SearchPanel = () => {
         {query && (
           <div className="flex flex-col gap-[2px]">
             <div className="text-[11px] font-semibold text-textMuted uppercase mb-2">
-              {filteredMenus.length} results
+              {searchResults.length} results
             </div>
-            {filteredMenus.map((menu: IMenu) => (
-              <div 
-                key={menu.path}
-                onClick={() => handleNavigate(menu.path)}
-                className="flex flex-col px-2 py-1.5 hover:bg-hover cursor-pointer rounded transition-colors group"
-              >
-                <div className="flex items-center gap-1.5 text-textColor group-hover:text-white">
-                  <VscChevronRight size={14} className="text-textMuted group-hover:text-accent" />
-                  <span className="text-[13px] font-medium">{menu.name}</span>
+            {searchResults.map((result) => {
+              const item = result.item;
+              return (
+                <div 
+                  key={item.id}
+                  onClick={() => handleNavigate(item.path, item.sectionId)}
+                  className="flex flex-col px-2 py-1.5 hover:bg-hover cursor-pointer rounded transition-colors group"
+                >
+                  <div className="flex items-center gap-1.5 text-textColor group-hover:text-white">
+                    <VscChevronRight size={14} className="text-textMuted group-hover:text-accent shrink-0" />
+                    <span className="text-[13px] font-medium truncate">{item.title}</span>
+                  </div>
+                  <div className="text-[11px] text-textMuted pl-5 truncate">
+                    {item.content}
+                  </div>
+                  <div className="text-[9px] text-textMuted/60 pl-5 pt-0.5 tracking-wider uppercase font-mono">
+                    {item.path}
+                  </div>
                 </div>
-                <div className="text-[11px] text-textMuted pl-5 truncate">
-                  {menu.path}
-                </div>
-              </div>
-            ))}
-            {filteredMenus.length === 0 && (
+              );
+            })}
+            {searchResults.length === 0 && (
               <p className="text-xs text-textMuted mt-2">
-                No matching files found.
+                No matching results found.
               </p>
             )}
           </div>
