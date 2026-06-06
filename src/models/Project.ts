@@ -6,6 +6,7 @@ export interface IProjectLink {
 export interface IProject {
   id: number;
   title: string;
+  year?: string;
   description: string;
   technologies: string[];
   imgSrc: string;

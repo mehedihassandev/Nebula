@@ -1,0 +1,331 @@
+[
+  {
+    "id": 1211344898,
+    "title": "Family-Grocery-List",
+    "description": "**Purpose**: Built to simplify family grocery shopping through shared, real-time lists.\\n\\n**Problem solved**: Have you ever come home from the store only to realize someone else in your family already bought the exact same items? Or maybe you forgot to buy the one thing your partner asked for? This app completely eliminates duplicate purchases and miscommunication. By providing a shared digital space with real-time Firebase synchronization, multiple family members can view, add, and check off grocery items simultaneously from their own devices, ensuring everyone is always on the same page.",
+    "technologies": [
+      "React Query",
+      "Firebase",
+      "React",
+      "React Native",
+      "Tailwind CSS",
+      "Zustand",
+      "TypeScript"
+    ],
+    "imgSrc": "https://opengraph.githubassets.com/1/mehedihassandev/Family-Grocery-List",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/Family-Grocery-List"
+      }
+    ]
+  },
+  {
+    "id": 792314666,
+    "title": "knock-knock",
+    "description": "**Purpose**: Designed to serve as a robust, real-time messaging and social platform.\\n\\n**Problem solved**: Building a chat application that feels truly instantaneous without overwhelming the device is a major technical hurdle. This project addresses the need for secure, seamless user interactions by implementing persistent JWT-based authentication and advanced data caching. By intelligently managing data fetching during infinite scrolling, it ensures users never experience frustrating lag or unnecessary loading screens while reading long conversation histories.",
+    "technologies": [
+      "Redux Toolkit",
+      "Framer Motion",
+      "React",
+      "Tailwind CSS"
+    ],
+    "imgSrc": "/assets/knock_knock.gif",
+    "errorImgSrc": "https://i.ibb.co/s2RZKn6/knock-knock.gif",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/knock-knock"
+      }
+    ]
+  },
+  {
+    "id": 776029704,
+    "title": "Nebula",
+    "description": "**Purpose**: Developed as a highly scalable, futuristic portfolio architecture.\\n\\n**Problem solved**: Traditional portfolios are often static, hard to scale, and require tedious manual updates every time you finish a new project. Nebula solves this maintenance nightmare by providing a highly optimized, modular Next.js structure that dynamically syncs with the GitHub API. It automatically pulls in your latest repositories and displays them in a visually stunning, terminal-inspired interface, meaning your portfolio grows effortlessly as you code.",
+    "technologies": [
+      "Framer Motion",
+      "React",
+      "Tailwind CSS"
+    ],
+    "imgSrc": "https://opengraph.githubassets.com/1/mehedihassandev/Nebula",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/Nebula"
+      },
+      {
+        "title": "Live",
+        "url": "https://mehedihassan.me"
+      }
+    ]
+  },
+  {
+    "id": 670127493,
+    "title": "tshirt-visualizer",
+    "description": "**Purpose**: Created to provide an interactive, 3D product customization experience for e-commerce stores.\\n\\n**Problem solved**: Online shoppers often hesitate to buy customized apparel because static images make it impossible to truly visualize the final product. This application completely solves the challenge of static product imagery. By allowing users to dynamically modify colors, upload their own logos, and instantly view those changes wrapped around a realistic 3D model in real-time, it significantly boosts user engagement and gives buyers the confidence they need to complete their purchase.",
+    "technologies": [
+      "Framer Motion",
+      "React",
+      "Three.js",
+      "Tailwind CSS"
+    ],
+    "imgSrc": "/assets/t_shirt.gif",
+    "errorImgSrc": "https://i.ibb.co/4ZmpdT4/t-shirt.gif",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/tshirt-visualizer"
+      }
+    ]
+  },
+  {
+    "id": 1208690236,
+    "title": "International-Day",
+    "description": "**Purpose**: Created to celebrate and educate users about International Mother Language Day.\\n\\n**Problem solved**: Reading static historical facts from a standard webpage can feel dry and unengaging for modern audiences. This project transforms cultural education into an engaging digital museum experience. It uses fluid, modern animations to bring historical milestones (like the Language Movement of 1952) and cultural heritage to life, making the learning experience memorable and emotionally resonant for a global audience.",
+    "technologies": [
+      "Firebase",
+      "Framer Motion",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "TypeScript"
+    ],
+    "imgSrc": "https://opengraph.githubassets.com/1/mehedihassandev/International-Day",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/International-Day"
+      },
+      {
+        "title": "Live",
+        "url": "https://international-day-three.vercel.app"
+      }
+    ]
+  },
+  {
+    "id": 1028298556,
+    "title": "pixel-craft",
+    "description": "**Purpose**: Engineered as an advanced, AI-powered image processing application.\\n\\n**Problem solved**: Professional image editing often requires expensive desktop software that is difficult to learn and inaccessible on the go. Pixel-craft provides users with a powerful, accessible, browser-based alternative. By leveraging efficient cloud processing, users can transform, optimize, and enhance their images using cutting-edge AI tools directly from their web browser, saving both time and money without sacrificing quality.",
+    "technologies": [
+      "Firebase",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "TypeScript"
+    ],
+    "imgSrc": "https://opengraph.githubassets.com/1/mehedihassandev/pixel-craft",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/pixel-craft"
+      },
+      {
+        "title": "Live",
+        "url": "https://pixel-craft-sigma.vercel.app"
+      }
+    ]
+  },
+  {
+    "id": 788278710,
+    "title": "dev-environment-setup",
+    "description": "**Purpose**: Curated to provide a one-click, standardized development environment configuration.\\n\\n**Problem solved**: Setting up a new computer or onboarding a new developer often leads to the dreaded \"it works on my machine\" problem, wasting hours of valuable time configuring dotfiles, terminal settings, and editor tooling. This repository eliminates that friction. It drastically reduces onboarding time by automating the entire setup process, ensuring a perfectly consistent, highly productive development environment across any machine in minutes.",
+    "technologies": [
+      "Shell"
+    ],
+    "imgSrc": "https://opengraph.githubassets.com/1/mehedihassandev/dev-environment-setup",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/dev-environment-setup"
+      }
+    ]
+  },
+  {
+    "id": 670943666,
+    "title": "movie-site",
+    "description": "**Purpose**: Developed to provide users with a clean, intuitive platform for discovering and reviewing the latest cinematic releases.\\n\\n**Problem solved**: Finding reliable information on new movies can be frustrating when dealing with slow, cluttered, or ad-heavy entertainment websites. This platform organizes scattered movie data into a centralized, easily navigable dashboard. It solves the issue of poor user experience by providing instant, beautifully formatted access to ratings, reviews, and dynamic metadata through an optimized UI that respects user time.",
+    "technologies": [
+      "Material UI",
+      "React",
+      "Styled Components",
+      "TypeScript"
+    ],
+    "imgSrc": "/assets/movie.gif",
+    "errorImgSrc": "https://i.ibb.co/4PznGJw/movie.gif",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/movie-site"
+      },
+      {
+        "title": "Live",
+        "url": "https://movie-site-fawn.vercel.app"
+      }
+    ]
+  },
+  {
+    "id": 673779472,
+    "title": "portfolio",
+    "description": "**Purpose**: Built to act as a deeply interactive, visually stunning digital resume and showcase for my development skills.\\n\\n**Problem solved**: In a sea of developers, traditional resume websites often fail to stand out to recruiters and clients. This project overcomes that hurdle by breaking away from standard 2D layouts. By integrating 3D elements and smooth, physics-based animations, it creates a memorable, immersive experience that immediately captures attention and practically demonstrates advanced frontend capabilities rather than just talking about them.",
+    "technologies": [
+      "Framer Motion",
+      "React",
+      "Three.js",
+      "Tailwind CSS"
+    ],
+    "imgSrc": "/assets/portfolio.gif",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/portfolio"
+      },
+      {
+        "title": "Live",
+        "url": "https://portfolio-tau-vert-94.vercel.app"
+      }
+    ]
+  },
+  {
+    "id": 890164558,
+    "title": "eCommerce-nextjs",
+    "description": "**Purpose**: Developed as a modern, high-performance e-commerce storefront.\\n\\n**Problem solved**: In the highly competitive online retail space, slow page loads and poor SEO can instantly kill conversion rates and drive customers away. This application addresses those critical business needs by utilizing server-side rendering and a robust headless backend architecture. This ensures lightning-fast navigation, exceptional search engine visibility, and a smooth, reliable shopping experience that keeps customers engaged from browsing to checkout.",
+    "technologies": [
+      "React Query",
+      "Framer Motion",
+      "MongoDB",
+      "Mongoose",
+      "Next.js",
+      "React",
+      "Zustand",
+      "Tailwind CSS",
+      "TypeScript"
+    ],
+    "imgSrc": "https://opengraph.githubassets.com/1/mehedihassandev/eCommerce-nextjs",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/eCommerce-nextjs"
+      },
+      {
+        "title": "Live",
+        "url": "https://ecom-preprod.vercel.app"
+      }
+    ]
+  },
+  {
+    "id": 867077328,
+    "title": "e-commerce",
+    "description": "**Purpose**: Built to demonstrate scalable state management in a complex retail application.\\n\\n**Problem solved**: As e-commerce platforms grow, managing the state of complex features like real-time cart synchronization, dynamic product filtering, and user authentication can quickly become a tangled, bug-prone mess. This project solves those architectural challenges by implementing a highly structured Redux-based architecture. It ensures that the user interface remains snappy and perfectly synchronized, preventing frustrating issues like missing items in the cart or unresponsive filters.",
+    "technologies": [
+      "Material UI",
+      "Redux Toolkit",
+      "React Query",
+      "React",
+      "Redux",
+      "TypeScript"
+    ],
+    "imgSrc": "https://opengraph.githubassets.com/1/mehedihassandev/e-commerce",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/e-commerce"
+      },
+      {
+        "title": "Live",
+        "url": "https://e-commerce-delta-pearl.vercel.app"
+      }
+    ]
+  },
+  {
+    "id": 1107630939,
+    "title": "BauhausClock",
+    "description": "**Purpose**: Designed as a minimalist, aesthetically pleasing digital timepiece.\\n\\n**Problem solved**: Many modern clock widgets are cluttered with unnecessary information, breaking the visual harmony of the user desktop or device screen. This project provides a clean, distraction-free alternative that celebrates the functionalist design principles of the Bauhaus movement. By utilizing precise native graphics, it offers a visually striking yet understated widget that focuses purely on elegant timekeeping.",
+    "technologies": [
+      "Swift"
+    ],
+    "imgSrc": "https://opengraph.githubassets.com/1/mehedihassandev/BauhausClock",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/BauhausClock"
+      }
+    ]
+  },
+  {
+    "id": 713969096,
+    "title": "dnd-gallary",
+    "description": "**Purpose**: Created to offer an intuitive, drag-and-drop image gallery interface.\\n\\n**Problem solved**: Manually sorting media assets in content management systems often involves clunky \"move up\" or \"move down\" buttons, making gallery organization a tedious chore for content creators. This interface dramatically improves the user experience by allowing users to physically pick up and reorder images using fluid, natural drag-and-drop interactions, making content curation feel effortless and satisfying.",
+    "technologies": [
+      "Material UI",
+      "React",
+      "Styled Components"
+    ],
+    "imgSrc": "https://opengraph.githubassets.com/1/mehedihassandev/dnd-gallary",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/dnd-gallary"
+      }
+    ]
+  },
+  {
+    "id": 877873187,
+    "title": "shihab-nextjs",
+    "description": "**Purpose**: Developed as a bespoke, highly optimized personal website.\\n\\n**Problem solved**: Personal branding websites often sacrifice performance for visual flair, resulting in sluggish load times on mobile devices. This project strikes the perfect balance. By carefully leveraging React server components and a lightweight styling framework, it delivers a lightning-fast, accessible user experience that guarantees maximum performance metrics without compromising on a professional, polished aesthetic.",
+    "technologies": [
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "TypeScript"
+    ],
+    "imgSrc": "https://opengraph.githubassets.com/1/mehedihassandev/shihab-nextjs",
+    "errorImgSrc": "https://i.ibb.co/8D6gDxb/portfolio.png",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/shihab-nextjs"
+      },
+      {
+        "title": "Live",
+        "url": "https://chancholuiux.vercel.app/"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "CRUD Operation",
+    "year": "2023",
+    "description": "**Purpose**: Created as a foundational data management dashboard to demonstrate robust full-stack data handling capabilities.\\n\\n**Problem solved**: Administrative panels are the backbone of most businesses, but they often suffer from data desynchronization where the screen shows outdated information after an edit. This project addresses the critical need for reliable, secure data manipulation (Create, Read, Update, Delete). By strictly typing payloads and gracefully handling asynchronous API state changes, it prevents data errors and ensures the dashboard always reflects the absolute truth of the database.",
+    "technologies": [
+      "React",
+      "JavaScript",
+      "TypeScript",
+      "Material UI",
+      "Free API",
+      "JSON Server"
+    ],
+    "imgSrc": "/assets/crud.gif",
+    "errorImgSrc": "https://i.ibb.co/QjtC1kB/crud.gif",
+    "links": [
+      {
+        "title": "GitHub",
+        "url": "https://github.com/mehedihassandev/crud-operation.git"
+      },
+      {
+        "title": "Live",
+        "url": "https://crud-operation-five-lime.vercel.app/"
+      }
+    ]
+  }
+]

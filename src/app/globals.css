@@ -2,6 +2,67 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Flate Theme (Default) */
+  --bg-primary: #1e1e20;
+  --bg-secondary: #282c34;
+  --bg-surface: #18181a;
+  --bg-hover: #2c313a;
+  --border-primary: #3e3e42;
+  --text-primary: #abb2bf;
+  --text-secondary: #5c6370;
+  --text-active: #d7dae0;
+  --accent: #61afef;
+  --accent-green: #a8c77b;
+  --accent-purple: #c678dd;
+  --accent-red: #e06c75;
+}
+
+[data-theme="everforest-pro"] {
+  --bg-primary: #2b3339;
+  --bg-secondary: #2f383e;
+  --bg-surface: #272e33;
+  --bg-hover: #3a454a;
+  --border-primary: #4a555b;
+  --text-primary: #d3c6aa;
+  --text-secondary: #859289;
+  --text-active: #e6e2cc;
+  --accent: #7fbbb3;
+  --accent-green: #a7c080;
+  --accent-purple: #d699b6;
+  --accent-red: #e67e80;
+}
+
+[data-theme="dracula"] {
+  --bg-primary: #282a36;
+  --bg-secondary: #21222c;
+  --bg-surface: #191a21;
+  --bg-hover: #44475a;
+  --border-primary: #6272a4;
+  --text-primary: #f8f8f2;
+  --text-secondary: #6272a4;
+  --text-active: #ffffff;
+  --accent: #bd93f9;
+  --accent-green: #50fa7b;
+  --accent-purple: #ff79c6;
+  --accent-red: #ff5555;
+}
+
+[data-theme="shades-of-purple"] {
+  --bg-primary: #2d2b55;
+  --bg-secondary: #1e1e3f;
+  --bg-surface: #1e1e3f;
+  --bg-hover: #4d21fc;
+  --border-primary: #1e1e3f;
+  --text-primary: #a599e9;
+  --text-secondary: #b362ff;
+  --text-active: #fad000;
+  --accent: #fad000;
+  --accent-green: #a5ff90;
+  --accent-purple: #fb94ff;
+  --accent-red: #ff628c;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -13,21 +74,21 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #19e684;
+  background: var(--border-primary);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #19e684;
+  background: var(--text-secondary);
 }
 
 .custom-text-stroke {
   color: transparent;
-  -webkit-text-stroke: 1px #19e684;
+  -webkit-text-stroke: 1px var(--accent);
   position: relative;
   overflow: hidden;
 }
@@ -49,8 +110,8 @@ body {
   --gradient-border: conic-gradient(
     from var(--border-angle),
     transparent 25%,
-    #53e7a0,
-    #19e684 99%,
+    var(--accent-green),
+    var(--accent) 99%,
     transparent
   );
 
@@ -80,7 +141,7 @@ body {
 }
 
 .welcome {
-  stroke: #19e684;
+  stroke: var(--accent);
   stroke-width: 3;
   fill: transparent;
   animation: textAnimate 5s infinite alternate;

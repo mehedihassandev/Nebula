@@ -1,31 +1,61 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState, useRef } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import PropTypes from 'prop-types';
-import { MdMenu, MdClose } from 'react-icons/md';
-import { Header } from './Header';
-import { Menu } from './Menu';
-import { Footer } from './Footer';
-import { CursorEffect } from '../components/CursorEffect';
-import { useCursorEffect } from '@hooks/cursor-effect-hook';
+import { ActivityBar, TabType, PopupType } from './ActivityBar';
+import { SidebarPanel } from './panels/SidebarPanel';
+import { AccountPanel } from './panels/AccountPanel';
+import { SettingsPanel } from './panels/SettingsPanel';
+import { StatusBar } from './StatusBar';
 import { useNotification } from '@hooks/notification-hook';
 import { Analytics } from '@vercel/analytics/react';
 import { EditorTabs } from './EditorTabs';
+import { CommandPalette } from './CommandPalette';
+import { CodeWindow } from './CodeWindow';
+import { useThemeStore } from '../store/themeStore';
+import { GhostTerminal } from './GhostTerminal';
+import { SHORTCUTS, checkShortcut } from '@constants/shortcuts';
+import { BottomPanel } from './BottomPanel';
+import { useUiStore } from '../store/uiStore';
+import { AchievementToast } from './AchievementToast';
+import { useAchievementsStore } from '../store/achievementsStore';
+import { useRouter } from 'next/navigation';
 
-/**
- * Defines the main shell structure for the application, handling the responsive sidebar,
- * custom cursor effects, and network status notifications.
- * This ensures a consistent UI across all Next.js pages and encapsulates global layout logic.
- *
- * @param children - The Next.js page content rendered inside the layout.
- * @returns The main application layout shell.
- */
 export const Layout = ({ children }: { children: React.ReactNode }) => {
-  const [showSidebar, setShowSidebar] = useState(false);
-  const { cursorPosition, isHovering, cursorTransition, isMoving } =
-    useCursorEffect();
+  const router = useRouter();
+  const [activeTab, setActiveTab] = useState<TabType>('explorer');
+  const [activePopup, setActivePopup] = useState<PopupType>(null);
   const notify = useNotification();
+  const popupRef = useRef<HTMLDivElement>(null);
+  const theme = useThemeStore((state) => state.theme);
+  const { toggleBottomPanel, setActiveBottomTab } = useUiStore();
+  const { unlockBadge } = useAchievementsStore();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      const isActivityBarBtn = (event.target as Element).closest(
+        '.activity-bar-btn'
+      );
+      if (
+        popupRef.current &&
+        !popupRef.current.contains(event.target as Node) &&
+        !isActivityBarBtn
+      ) {
+        setActivePopup(null);
+      }
+    };
+
+    if (activePopup) {
+      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener('touchstart', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('touchstart', handleClickOutside);
+    };
+  }, [activePopup]);
 
   useEffect(() => {
     const handleOffline = () => {
@@ -39,80 +69,137 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
     };
   }, [notify]);
 
+  // Konami Code Detection
+  useEffect(() => {
+    const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+    let konamiIndex = 0;
+
+    const handleKonami = (e: KeyboardEvent) => {
+      if (e.key === konamiSequence[konamiIndex]) {
+        konamiIndex++;
+        if (konamiIndex === konamiSequence.length) {
+          unlockBadge('KONAMI_CODE');
+          konamiIndex = 0;
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    };
+
+    window.addEventListener('keydown', handleKonami);
+    return () => window.removeEventListener('keydown', handleKonami);
+  }, [unlockBadge]);
+
+  useEffect(() => {
+    const handleGlobalShortcuts = (e: KeyboardEvent) => {
+      if (checkShortcut(e, SHORTCUTS.EXPLORER)) {
+        e.preventDefault();
+        e.stopPropagation();
+        setActiveTab('explorer');
+        setActivePopup(null);
+      }
+      if (checkShortcut(e, SHORTCUTS.SEARCH)) {
+        e.preventDefault();
+        e.stopPropagation();
+        setActiveTab('search');
+        setActivePopup(null);
+      }
+      if (checkShortcut(e, SHORTCUTS.EXTENSIONS)) {
+        e.preventDefault();
+        e.stopPropagation();
+        setActiveTab('extensions');
+        setActivePopup(null);
+      }
+      if (checkShortcut(e, SHORTCUTS.SETTINGS)) {
+        e.preventDefault();
+        e.stopPropagation();
+        router.push('/settings');
+      }
+      if (checkShortcut(e, SHORTCUTS.TERMINAL)) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleBottomPanel();
+        setActiveBottomTab('TERMINAL');
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalShortcuts, {
+      capture: true
+    });
+    return () =>
+      window.removeEventListener('keydown', handleGlobalShortcuts, {
+        capture: true
+      });
+  }, [activePopup, router]);
+
   return (
-    <div className="relative flex bg-primary text-white">
-      <motion.button
-        className="absolute top-4 right-4 z-50 text-white md:hidden"
-        onClick={() => setShowSidebar(!showSidebar)}
-        whileHover={{ scale: 1.2, color: '#FFD700' }}
-        whileTap={{ scale: 0.9 }}
-      >
-        <motion.div
-          initial={{ rotate: 0 }}
-          animate={{ rotate: showSidebar ? 90 : 0 }}
-          transition={{ duration: 0.3 }}
-        >
-          {showSidebar ? <MdClose size={28} /> : <MdMenu size={28} />}
-        </motion.div>
-      </motion.button>
-
-      <div
-        className={`bg-primary h-screen w-screen md:w-[450px] xl:w-[550px] pl-10 flex flex-col justify-around transition-all duration-300 fixed md:static ${
-          showSidebar ? 'left-0 z-40 pr-10' : '-left-full'
-        } lg:left-0 border-r border-white/5`}
-      >
-        <div>
-          <Header />
-          <Menu setShowSidebar={setShowSidebar} />
-        </div>
-
-        <Footer />
+    <div
+      data-theme={theme}
+      className="flex flex-col h-screen w-screen bg-primary text-textColor overflow-hidden font-sans relative"
+    >
+      {/* Background Blobs for Glassmorphism */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
+        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-accent/20 blur-[120px]" />
+        <div className="absolute bottom-[0%] -right-[10%] w-[40%] h-[50%] rounded-full bg-accent/10 blur-[120px]" />
       </div>
 
-      <main className="w-full h-screen bg-primary overflow-auto relative flex flex-col">
-        <EditorTabs />
-        {/* <img
-          src="https://i.ibb.co/R7nJpLv/HI.png"
-          alt="Background"
-          className="fixed w-[200px] h-[125px] lg:w-[350px] lg:h-[300px] top-1/2 left-1/3 lg:left-1/2 transform -translate-x-1/1 -translate-y-1/2 z-10 opacity-100"
-          style={{ zIndex: 1 }}
-        /> */}
-        <div
-          style={{ position: 'relative', zIndex: 2 }}
-          className="flex-1 flex flex-col"
-        >
-          <div className="flex-1 flex flex-col w-full h-full">
-            {children}
+      <div className="flex flex-1 overflow-hidden z-10 relative">
+        {/* Editor Main View */}
+        <main className="flex-1 flex flex-col min-w-0 bg-transparent relative z-10">
+          <EditorTabs />
+          <div className="flex-1 overflow-auto relative">
+            <CodeWindow>{children}</CodeWindow>
             <Analytics />
           </div>
+          <BottomPanel />
+        </main>
+
+        {/* Expandable Sidebar Panel */}
+        <AnimatePresence mode="wait">
+          <SidebarPanel activeTab={activeTab} setActiveTab={setActiveTab} />
+        </AnimatePresence>
+
+        {/* Activity Bar and Popups */}
+        <div className="relative flex z-[100]">
+          <ActivityBar
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            activePopup={activePopup}
+            setActivePopup={setActivePopup}
+          />
+
+          <AnimatePresence>
+            {activePopup && (
+              <motion.div
+                ref={popupRef}
+                initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                transition={{ duration: 0.15 }}
+                className={`absolute right-[60px] z-[60] ${activePopup === 'account' ? 'bottom-[66px] w-64' : 'bottom-[16px] w-72'}`}
+              >
+                {activePopup === 'account' ? (
+                  <AccountPanel closePopup={() => setActivePopup(null)} />
+                ) : (
+                  <SettingsPanel 
+                    closePopup={() => setActivePopup(null)} 
+                    setActiveTab={setActiveTab} 
+                  />
+                )}
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-      </main>
+      </div>
 
-      {/* Custom Cursor */}
-      <CursorEffect
-        cursorPosition={cursorPosition}
-        width="10px"
-        height="10px"
-        backgroundColor="#fff"
-        transition={cursorTransition}
-        transform={`translate(-50%, -50%) ${isHovering ? 'scale(9)' : 'scale(1)'}`}
-        opacity={1}
-        zIndex={9999}
-      />
+      {/* Status Bar */}
+      <StatusBar />
 
-      {/* Larger Ring for Movement */}
-      {isMoving && !isHovering && (
-        <CursorEffect
-          cursorPosition={cursorPosition}
-          width="50px"
-          height="50px"
-          backgroundColor="rgba(255, 255, 255, 0.1)"
-          transform="translate(-50%, -50%)"
-          transition="transform 0.3s ease-out, opacity 0.3s ease-out"
-          opacity={isMoving && !isHovering ? 1 : 0}
-          zIndex={9998}
-        />
-      )}
+      {/* Global Command Palette */}
+      <CommandPalette />
+
+      {/* Easter Egg Toasts */}
+      <AchievementToast />
     </div>
   );
 };
